@@ -1,3 +1,5 @@
+import { Settings } from "lucide-react";
+
 import { Card } from "@/components/ui/card";
 
 interface ConfigCardProps {
@@ -11,6 +13,42 @@ interface ConfigCardProps {
     executor: string;
 
     stopOnAbend: string;
+
+}
+
+function Item({
+
+    label,
+
+    value
+
+}: {
+
+    label: string;
+
+    value: string;
+
+}) {
+
+    return (
+
+        <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/50 p-4">
+
+            <div className="mb-2 text-xs font-medium uppercase tracking-widest text-zinc-500">
+
+                {label}
+
+            </div>
+
+            <div className="break-all text-sm text-zinc-200">
+
+                {value || "-"}
+
+            </div>
+
+        </div>
+
+    );
 
 }
 
@@ -30,65 +68,65 @@ export default function ConfigCard({
 
     return (
 
-        <Card className="rounded-2xl border-zinc-800 bg-zinc-900 p-6">
+        <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl">
 
-            <h2 className="mb-6 text-xl font-bold">
+            <div className="mb-8 flex items-center gap-4">
 
-                ⚙ Configuration
+                <div className="rounded-2xl bg-violet-500/10 p-3">
 
-            </h2>
+                    <Settings className="h-6 w-6 text-violet-400" />
 
-            <div className="space-y-5">
-
-                <div>
-                    <div className="text-sm text-zinc-500">
-                        Volume
-                    </div>
-
-                    <div className="break-all">
-                        {volume}
-                    </div>
                 </div>
 
-                <div>
-                    <div className="text-sm text-zinc-500">
-                        Script IN
-                    </div>
+                <h2 className="text-2xl font-bold text-white">
 
-                    <div className="break-all">
-                        {scriptIn}
-                    </div>
-                </div>
+                    Configuration
 
-                <div>
-                    <div className="text-sm text-zinc-500">
-                        Output
-                    </div>
+                </h2>
 
-                    <div className="break-all">
-                        {output}
-                    </div>
-                </div>
+            </div>
 
-                <div>
-                    <div className="text-sm text-zinc-500">
-                        Executor
-                    </div>
+            <div className="space-y-4">
 
-                    <div className="break-all">
-                        {executor}
-                    </div>
-                </div>
+                <Item
 
-                <div>
-                    <div className="text-sm text-zinc-500">
-                        Stop on Abend
-                    </div>
+                    label="Volume"
 
-                    <div>
-                        {stopOnAbend}
-                    </div>
-                </div>
+                    value={volume}
+
+                />
+
+                <Item
+
+                    label="Script IN"
+
+                    value={scriptIn}
+
+                />
+
+                <Item
+
+                    label="Output"
+
+                    value={output}
+
+                />
+
+                <Item
+
+                    label="Executor"
+
+                    value={executor}
+
+                />
+
+                <Item
+
+                    label="Stop on Abend"
+
+                    value={stopOnAbend}
+
+                />
 
             </div>
 

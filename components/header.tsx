@@ -1,54 +1,128 @@
 "use client";
 
 import Link from "next/link";
-import { Search, WandSparkles, Upload, Bot } from "lucide-react";
+import { usePathname } from "next/navigation";
+
+import {
+
+    Database,
+
+    Dna,
+
+    WandSparkles
+
+} from "lucide-react";
 
 export default function Header() {
 
+    const pathname = usePathname();
+
     return (
 
-        <header className="border-b bg-background">
+        <header className="sticky top-0 z-50 border-b border-zinc-800/50 bg-[#09090b]/90 backdrop-blur-xl">
 
-            <div className="mx-auto flex h-16 items-center px-6">
+            <div className="mx-auto flex h-24 max-w-[1800px] items-center justify-between px-8">
 
-                <div className="text-xl font-bold">
+                <div className="flex items-center gap-5">
 
-                    NETBATCH HELPER
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/10">
+
+                        <Dna className="h-7 w-7 text-violet-400" />
+
+                    </div>
+
+                    <div>
+
+                        <div className="text-2xl font-bold tracking-tight text-white">
+
+                            NETBATCH HELPER
+
+                        </div>
+
+                        <div className="mt-1 text-sm text-zinc-500">
+
+                            HP NonStop • Batchcom • Explorer • Generator
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div className="ml-10 flex gap-8">
+                <div className="flex gap-2 rounded-3xl border border-zinc-800 bg-[#111113] p-2">
 
                     <Link
+
                         href="/explorer"
-                        className="flex items-center gap-2 text-sm font-medium hover:text-primary"
+
+                        className={`
+                            flex items-center gap-3 rounded-2xl px-6 py-3 transition-all duration-300
+                            ${
+                                pathname === "/explorer"
+
+                                    ? "bg-violet-600 text-white shadow-[0_0_25px_rgba(124,58,237,.4)]"
+
+                                    : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                            }
+                        `}
+
                     >
-                        <Search className="h-4 w-4" />
-                        Explorer
+
+                        <Database className="h-5 w-5" />
+
+                        <div className="flex flex-col leading-none">
+
+                            <span className="text-xs">
+
+                                Explorer
+
+                            </span>
+
+                            <span className="font-semibold">
+
+                                Base
+
+                            </span>
+
+                        </div>
+
                     </Link>
 
                     <Link
+
                         href="/generator"
-                        className="flex items-center gap-2 text-sm font-medium hover:text-primary"
-                    >
-                        <WandSparkles className="h-4 w-4" />
-                        Obey Generator
-                    </Link>
 
-                    <Link
-                        href="/import"
-                        className="flex items-center gap-2 text-sm font-medium hover:text-primary"
-                    >
-                        <Upload className="h-4 w-4" />
-                        Import Logs
-                    </Link>
+                        className={`
+                            flex items-center gap-3 rounded-2xl px-6 py-3 transition-all duration-300
+                            ${
+                                pathname === "/generator"
 
-                    <Link
-                        href="/assistant"
-                        className="flex items-center gap-2 text-sm font-medium hover:text-primary"
+                                    ? "bg-violet-600 text-white shadow-[0_0_25px_rgba(124,58,237,.4)]"
+
+                                    : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                            }
+                        `}
+
                     >
-                        <Bot className="h-4 w-4" />
-                        Assistant
+
+                        <WandSparkles className="h-5 w-5" />
+
+                        <div className="flex flex-col leading-none">
+
+                            <span className="text-xs">
+
+                                Obey
+
+                            </span>
+
+                            <span className="font-semibold">
+
+                                Generator
+
+                            </span>
+
+                        </div>
+
                     </Link>
 
                 </div>

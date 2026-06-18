@@ -1,3 +1,7 @@
+"use client";
+
+import { useMemo, useState } from "react";
+
 import Header from "@/components/header";
 import SearchBar from "@/components/search-bar";
 import MonitorFilters from "@/components/monitor-filters";
@@ -8,112 +12,306 @@ import PlanningCard from "@/components/planning-card";
 import DependencyCard from "@/components/dependency-card";
 import ObeyCard from "@/components/obey-card";
 
+import { searchJobs } from "@/lib/search";
+import { translateEvery } from "@/lib/every";
+import { Job } from "@/lib/types";
+
 export default function ExplorerPage() {
-  return (
-    <div className="min-h-screen bg-zinc-950 text-white">
 
-      <Header />
+    const [search, setSearch] = useState("");
 
-      <div className="grid grid-cols-12 gap-6 p-6">
+    const [selectedMonitors, setSelectedMonitors] = useState([
+        "$ZBAP",
+        "$ZBAT",
+        "$ZBAD"
+    ]);
 
-        {/* Colonne gauche */}
+    const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
-        <div className="col-span-3 space-y-6">
+    function toggleMonitor(monitor: string) {
 
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5">
+        if (selectedMonitors.includes(monitor)) {
 
-            <SearchBar />
+            setSelectedMonitors(
 
-            <div className="mt-6">
+                selectedMonitors.filter(
 
-              <MonitorFilters />
+                    m => m !== monitor
+
+                )
+
+            );
+
+        }
+
+        else {
+
+            setSelectedMonitors(
+
+                [
+
+                    ...selectedMonitors,
+
+                    monitor
+
+                ]
+
+            );
+
+        }
+
+    }
+
+    const results = useMemo(() => {
+
+        return searchJobs(search)
+
+            .filter(
+
+                job => selectedMonitors.includes(
+
+                    job.monitor
+
+                )
+
+            );
+
+    }, [
+
+        search,
+
+        selectedMonitors
+
+    ]);
+
+    const currentJob = selectedJob || results[0] || null;
+
+    const waitFor = currentJob?.parameters["WAITON"]
+
+        ?.split(",")
+
+        .map(x => x.trim())
+
+        .filter(Boolean)
+
+        || [];
+
+    const blockedByThis = currentJob?.parameters["AFTER"]
+
+        ?.split(",")
+
+        .map(x => x.trim())
+
+        .filter(Boolean)
+
+        || [];
+
+    return (
+
+        <div className="h-screen overflow-hidden bg-[#09090b] text-white">
+
+            <Header />
+
+            <div className="mx-auto flex h-[calc(100vh-112px)] max-w-[1800px] gap-8 p-8">
+
+                {/* Sidebar */}
+
+                <div className="flex w-[400px] flex-col gap-6">
+
+                    <div className="rounded-3xl border border-zinc-800 bg-[#111113] p-6">
+
+                        <SearchBar
+
+                            value={search}
+
+                            onChange={setSearch}
+
+                        />
+
+                        <div className="mt-6">
+
+                            <MonitorFilters
+
+                                selectedMonitors={selectedMonitors}
+
+                                toggleMonitor={toggleMonitor}
+
+                            />
+
+                        </div>
+
+                    </div>
+
+                    <div className="flex-1 space-y-4 overflow-y-auto pr-2">
+
+                        {
+
+                            results.map(
+
+                                (job) => (
+
+                                    <JobCard
+
+                                        key={`${job.monitor}_${job.job_name}`}
+
+                                        selected={
+
+                                            currentJob?.job_name === job.job_name
+
+                                        }
+
+                                        jobName={job.job_name}
+
+                                        script={
+
+                                            job.parameters["SET IN"] || ""
+
+                                        }
+
+                                        user={
+
+                                            job.parameters["==CHANGEUSER"] || ""
+
+                                        }
+
+                                        monitor={job.monitor}
+
+                                        onClick={() =>
+
+                                            setSelectedJob(job)
+
+                                        }
+
+                                    />
+
+                                )
+
+                            )
+
+                        }
+
+                    </div>
+
+                </div>
+
+                {/* Partie droite */}
+
+                <div className="flex-1 overflow-y-auto pr-2">
+
+                    {
+
+                        currentJob && (
+
+                            <div className="space-y-8">
+
+                                <HeaderCard
+
+                                    jobName={currentJob.job_name}
+
+                                    monitor={currentJob.monitor}
+
+                                    jobNumber={currentJob.job_number || 0}
+
+                                    user={
+
+                                        currentJob.parameters["==CHANGEUSER"] || ""
+
+                                    }
+
+                                    description={
+
+                                        currentJob.parameters["SET DESCRIPTION"] || ""
+
+                                    }
+
+                                />
+
+                                <div className="grid grid-cols-2 gap-8">
+
+                                    <ConfigCard
+
+                                        volume={
+
+                                            currentJob.parameters["SET VOLUME"] || ""
+
+                                        }
+
+                                        scriptIn={
+
+                                            currentJob.parameters["SET IN"] || ""
+
+                                        }
+
+                                        output={
+
+                                            currentJob.parameters["SET OUT"] || ""
+
+                                        }
+
+                                        executor={
+
+                                            currentJob.parameters["SET EXECUTOR-PROGRAM"] || ""
+
+                                        }
+
+                                        stopOnAbend={
+
+                                            currentJob.parameters["SET STOP-ON-ABEND"] || ""
+
+                                        }
+
+                                    />
+
+                                    <PlanningCard
+
+                                        every={
+
+                                            currentJob.parameters["SET EVERY"] || ""
+
+                                        }
+
+                                        translation={
+
+                                            translateEvery(
+
+                                                currentJob.parameters["SET EVERY"] || ""
+
+                                            )
+
+                                        }
+
+                                        nextRun="-"
+
+                                    />
+
+                                </div>
+
+                                <DependencyCard
+
+                                    waitFor={waitFor}
+
+                                    blockedByThis={blockedByThis}
+
+                                />
+
+                                <ObeyCard
+
+                                    obey={currentJob.obey_form}
+
+                                />
+
+                            </div>
+
+                        )
+
+                    }
+
+                </div>
 
             </div>
 
-          </div>
-
-          <div className="space-y-4">
-
-            <JobCard
-              selected
-              jobName="ONTST03"
-              script="\ISIS.$DEVT05.NETDCMD.ONTST03"
-              user="90,1"
-              monitor="$ZBAD"
-            />
-
-            <JobCard
-              jobName="ONTST01"
-              script="\ISIS.$DEVT05.NETDCMD.ONTST01"
-              user="90,1"
-              monitor="$ZBAD"
-            />
-
-          </div>
-
         </div>
 
-        {/* Partie droite */}
+    );
 
-        <div className="col-span-9 space-y-6">
-
-          <HeaderCard
-            jobName="ONTST03"
-            monitor="$ZBAD"
-            jobNumber={1438}
-            user="90,1"
-            description="Job de test standard"
-          />
-
-          <div className="grid grid-cols-2 gap-6">
-
-            <ConfigCard
-              volume="\ISIS.$DEVT05.NETDDTS"
-              scriptIn="\ISIS.$DEVT05.NETDCMD.ONTST03"
-              output="\ISIS.$VHNET"
-              executor="\ISIS.$SYSTEM.SYS02.TACL"
-              stopOnAbend="ON"
-            />
-
-            <PlanningCard
-              every="1,31 * * * 1-5"
-              translation={
-                "Du lundi au vendredi\nToutes les heures\nAux minutes 1 et 31"
-              }
-              nextRun="19/06/2026 13:31"
-            />
-
-          </div>
-
-          <DependencyCard
-            waitFor={[]}
-            blockedByThis={[]}
-          />
-
-          <ObeyCard
-            obey={`ASSUME JOB
-
-RESET
-
-SET VOLUME \\ISIS.$DEVT05.NETDDTS
-
-SET IN \\ISIS.$DEVT05.NETDCMD.ONTST03
-
-SET OUT \\ISIS.$VHNET
-
-SET EXECUTOR-PROGRAM \\ISIS.$SYSTEM.SYS02.TACL
-
-SET EVERY 1,31 * * * 1-5
-
-==CHANGEUSER 90,1
-
-SUBMIT ONTST03`}
-          />
-
-        </div>
-
-      </div>
-
-    </div>
-  );
 }

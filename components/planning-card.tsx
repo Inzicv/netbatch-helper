@@ -1,3 +1,5 @@
+import { CalendarDays } from "lucide-react";
+
 import { Card } from "@/components/ui/card";
 
 interface PlanningCardProps {
@@ -22,59 +24,69 @@ export default function PlanningCard({
 
     return (
 
-        <Card className="rounded-2xl border-zinc-800 bg-zinc-900 p-6">
+        <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl">
 
-            <h2 className="mb-6 text-xl font-bold">
+            <div className="mb-8 flex items-center gap-4">
 
-                📅 Planification
+                <div className="rounded-2xl bg-violet-500/10 p-3">
 
-            </h2>
+                    <CalendarDays className="h-6 w-6 text-violet-400" />
+
+                </div>
+
+                <h2 className="text-2xl font-bold text-white">
+
+                    Planification
+
+                </h2>
+
+            </div>
 
             <div className="space-y-5">
 
-                <div>
+                <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/50 p-5">
 
-                    <div className="text-sm text-zinc-500">
+                    <div className="mb-3 text-xs uppercase tracking-widest text-zinc-500">
 
                         EVERY
 
                     </div>
 
-                    <div>
+                    <div className="font-mono text-sm text-zinc-200">
 
-                        {every}
+                        {every || "-"}
 
                     </div>
 
                 </div>
 
-                <div>
+                <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/50 p-5">
 
-                    <div className="text-sm text-zinc-500">
+                    <div className="mb-3 text-xs uppercase tracking-widest text-zinc-500">
 
                         Traduction humaine
 
                     </div>
 
-                    <div className="whitespace-pre-line">
+                    <div className="whitespace-pre-line text-zinc-300">
 
-                        {translation}
+                        {translation || "-"}
 
                     </div>
 
                 </div>
 
-                <div>
+                <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/50 p-5">
 
-                    <div className="text-sm text-zinc-500">
+                    <div className="mb-3 text-xs uppercase tracking-widest text-zinc-500">
 
                         Prochaine exécution
 
                     </div>
 
-                    <div>
+                    <div className="text-zinc-400">
 
-                        {nextRun}
+                        {nextRun || "-"}
 
                     </div>
 

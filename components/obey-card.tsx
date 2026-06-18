@@ -1,7 +1,9 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
+import { Clipboard, Download, ScrollText } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface ObeyCardProps {
 
@@ -17,47 +19,117 @@ export default function ObeyCard({
 
     async function copyObey() {
 
-        await navigator.clipboard.writeText(obey);
+        await navigator.clipboard.writeText(
+
+            obey
+
+        );
+
+    }
+
+    function downloadObey() {
+
+        const blob = new Blob(
+
+            [obey],
+
+            {
+
+                type: "text/plain"
+
+            }
+
+        );
+
+        const url = URL.createObjectURL(
+
+            blob
+
+        );
+
+        const link = document.createElement(
+
+            "a"
+
+        );
+
+        link.href = url;
+
+        link.download = "job.obey";
+
+        link.click();
+
+        URL.revokeObjectURL(
+
+            url
+
+        );
 
     }
 
     return (
 
-        <Card className="rounded-2xl border-zinc-800 bg-zinc-900 p-6">
+        <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl">
 
-            <h2 className="mb-6 text-xl font-bold">
+            <div className="mb-8 flex items-center justify-between">
 
-                📜 OBEY complet
+                <div className="flex items-center gap-4">
 
-            </h2>
+                    <div className="rounded-2xl bg-violet-500/10 p-3">
 
-            <pre className="overflow-auto rounded-xl border border-zinc-800 bg-zinc-950 p-5 text-sm text-zinc-300">
+                        <ScrollText className="h-6 w-6 text-violet-400" />
+
+                    </div>
+
+                    <h2 className="text-2xl font-bold text-white">
+
+                        OBEY complet
+
+                    </h2>
+
+                </div>
+
+                <div className="flex gap-3">
+
+                    <Button
+
+                        onClick={copyObey}
+
+                        className="rounded-2xl"
+
+                    >
+
+                        <Clipboard className="mr-2 h-4 w-4" />
+
+                        Copier
+
+                    </Button>
+
+                    <Button
+
+                        variant="secondary"
+
+                        onClick={downloadObey}
+
+                        className="rounded-2xl"
+
+                    >
+
+                        <Download className="mr-2 h-4 w-4" />
+
+                        Télécharger
+
+                    </Button>
+
+                </div>
+
+            </div>
+
+            <pre className="max-h-[700px] overflow-auto rounded-3xl border border-zinc-800 bg-[#0b0d13] p-8 text-sm text-zinc-300">
 
                 {obey}
 
             </pre>
-
-            <div className="mt-6 flex gap-3">
-
-                <Button>
-
-                    📋 Copier
-
-                </Button>
-
-                <Button variant="secondary">
-
-                    🧬 Cloner
-
-                </Button>
-
-                <Button variant="secondary">
-
-                    📥 Télécharger
-
-                </Button>
-
-            </div>
 
         </Card>
 
