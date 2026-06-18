@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { Search } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+
+import { searchJobs } from "@/lib/search";
 
 interface ModelCardProps {
 
@@ -20,41 +22,169 @@ export default function ModelCard({
 
     const [query, setQuery] = useState("");
 
+    const results = useMemo(
+
+        () => {
+
+            if (!query) {
+
+                return [];
+
+            }
+
+            return searchJobs(query).slice(0, 10);
+
+        },
+
+        [
+
+            query
+
+        ]
+
+    );
+
     return (
 
-        <Card className="rounded-2xl border-zinc-800 bg-zinc-900 p-6">
+        <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl">
 
-            <h2 className="mb-6 text-xl font-bold">
+            <div className="mb-8 flex items-center gap-4">
 
-                📚 Modèle
+                <div className="rounded-2xl bg-violet-500/10 p-3">
 
-            </h2>
+                    <Search className="h-6 w-6 text-violet-400" />
 
-            <div className="space-y-4">
+                </div>
+
+                <h2 className="text-2xl font-bold text-white">
+
+                    Modèle
+
+                </h2>
+
+            </div>
+
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
 
                 <Input
 
-                    placeholder="Nom ou numéro du job"
-
                     value={query}
 
-                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Rechercher un modèle..."
 
-                    className="border-zinc-800 bg-zinc-950"
+                    className="
+                        h-14
+                        border-zinc-800
+                        bg-zinc-950
+                        text-zinc-200
+                        placeholder:text-zinc-500
+                        focus-visible:ring-violet-500
+                    "
+
+                    onChange={(e) =>
+
+                        setQuery(
+
+                            e.target.value
+
+                        )
+
+                    }
 
                 />
 
-                <Button
+                {
 
-                    className="w-full"
+                    results.length > 0 && (
 
-                    onClick={() => onLoad(query)}
+                        <div className="mt-4 space-y-2">
 
-                >
+                            {
 
-                    Charger le modèle
+                                results.map(
 
-                </Button>
+                                    (job) => (
+
+                                        <button
+
+                                            key={`${job.monitor}_${job.job_name}`}
+
+                                            className="
+                                                flex
+                                                w-full
+                                                items-center
+                                                justify-between
+                                                rounded-2xl
+                                                border
+                                                border-zinc-800
+                                                bg-zinc-950
+                                                px-5
+                                                py-4
+                                                text-left
+                                                transition-all
+                                                hover:border-violet-500
+                                                hover:bg-zinc-900
+                                            "
+
+                                            onClick={() => {
+
+                                                setQuery(
+
+                                                    job.job_name
+
+                                                );
+
+                                                onLoad(
+
+                                                    job.job_name
+
+                                                );
+
+                                            }}
+
+                                        >
+
+                                            <div>
+
+                                                <div className="font-semibold text-white">
+
+                                                    {job.job_name}
+
+                                                </div>
+
+                                                <div className="text-sm text-zinc-500">
+
+                                                    {job.monitor}
+
+                                                </div>
+
+                                            </div>
+
+                                            <div className="rounded-full bg-violet-500/10 px-3 py-1 text-sm text-violet-300">
+
+                                                #
+
+                                                {
+
+                                                    job.job_number
+
+                                                }
+
+                                            </div>
+
+                                        </button>
+
+                                    )
+
+                                )
+
+                            }
+
+                        </div>
+
+                    )
+
+                }
 
             </div>
 

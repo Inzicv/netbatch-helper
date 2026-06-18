@@ -1,22 +1,72 @@
-import { GitBranch } from "lucide-react";
+"use client";
+
+import { GitBranch, Plus, Trash2 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface DependencyCardProps {
 
     waitFor: string[];
+    setWaitFor: (value: string[]) => void;
 
-    blockedByThis: string[];
+    after: string[];
+    setAfter: (value: string[]) => void;
 
 }
 
 export default function DependencyCard({
 
     waitFor,
+    setWaitFor,
 
-    blockedByThis
+    after,
+    setAfter
 
 }: DependencyCardProps) {
+
+    function update(
+
+        values: string[],
+
+        setValues: (value: string[]) => void,
+
+        index: number,
+
+        value: string
+
+    ) {
+
+        const copy = [...values];
+
+        copy[index] = value.toUpperCase();
+
+        setValues(copy);
+
+    }
+
+    function remove(
+
+        values: string[],
+
+        setValues: (value: string[]) => void,
+
+        index: number
+
+    ) {
+
+        setValues(
+
+            values.filter(
+
+                (_, i) => i !== index
+
+            )
+
+        );
+
+    }
 
     return (
 
@@ -38,105 +88,221 @@ export default function DependencyCard({
 
             </div>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-2 gap-8">
 
-                <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/50 p-6">
+                <div className="space-y-4">
 
-                    <div className="mb-4 text-xs uppercase tracking-widest text-zinc-500">
+                    <div className="text-zinc-400">
 
                         Attend
 
                     </div>
 
-                    <div className="space-y-3">
+                    {
 
-                        {
+                        waitFor.map(
 
-                            waitFor.length === 0
+                            (job, index) => (
 
-                                ? (
+                                <div
 
-                                    <div className="text-zinc-500">
+                                    key={index}
 
-                                        Aucun
+                                    className="flex gap-3"
 
-                                    </div>
+                                >
 
-                                )
+                                    <Input
 
-                                : waitFor.map(
+                                        value={job}
 
-                                    job => (
+                                        onChange={(e) =>
 
-                                        <div
+                                            update(
 
-                                            key={job}
+                                                waitFor,
 
-                                            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-zinc-200"
+                                                setWaitFor,
 
-                                        >
+                                                index,
 
-                                            {job}
+                                                e.target.value
 
-                                        </div>
+                                            )
 
-                                    )
+                                        }
 
-                                )
+                                        className="border-zinc-800 bg-zinc-950"
+
+                                    />
+
+                                    <Button
+
+                                        variant="destructive"
+
+                                        onClick={() =>
+
+                                            remove(
+
+                                                waitFor,
+
+                                                setWaitFor,
+
+                                                index
+
+                                            )
+
+                                        }
+
+                                    >
+
+                                        <Trash2 className="h-4 w-4" />
+
+                                    </Button>
+
+                                </div>
+
+                            )
+
+                        )
+
+                    }
+
+                    <Button
+
+                        variant="secondary"
+
+                        onClick={() =>
+
+                            setWaitFor(
+
+                                [
+
+                                    ...waitFor,
+
+                                    ""
+
+                                ]
+
+                            )
 
                         }
 
-                    </div>
+                    >
+
+                        <Plus className="mr-2 h-4 w-4" />
+
+                        Ajouter
+
+                    </Button>
 
                 </div>
 
-                <div className="rounded-2xl border border-zinc-800/70 bg-zinc-950/50 p-6">
+                <div className="space-y-4">
 
-                    <div className="mb-4 text-xs uppercase tracking-widest text-zinc-500">
+                    <div className="text-zinc-400">
 
                         Déclenche
 
                     </div>
 
-                    <div className="space-y-3">
+                    {
 
-                        {
+                        after.map(
 
-                            blockedByThis.length === 0
+                            (job, index) => (
 
-                                ? (
+                                <div
 
-                                    <div className="text-zinc-500">
+                                    key={index}
 
-                                        Aucun
+                                    className="flex gap-3"
 
-                                    </div>
+                                >
 
-                                )
+                                    <Input
 
-                                : blockedByThis.map(
+                                        value={job}
 
-                                    job => (
+                                        onChange={(e) =>
 
-                                        <div
+                                            update(
 
-                                            key={job}
+                                                after,
 
-                                            className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 text-zinc-200"
+                                                setAfter,
 
-                                        >
+                                                index,
 
-                                            {job}
+                                                e.target.value
 
-                                        </div>
+                                            )
 
-                                    )
+                                        }
 
-                                )
+                                        className="border-zinc-800 bg-zinc-950"
+
+                                    />
+
+                                    <Button
+
+                                        variant="destructive"
+
+                                        onClick={() =>
+
+                                            remove(
+
+                                                after,
+
+                                                setAfter,
+
+                                                index
+
+                                            )
+
+                                        }
+
+                                    >
+
+                                        <Trash2 className="h-4 w-4" />
+
+                                    </Button>
+
+                                </div>
+
+                            )
+
+                        )
+
+                    }
+
+                    <Button
+
+                        variant="secondary"
+
+                        onClick={() =>
+
+                            setAfter(
+
+                                [
+
+                                    ...after,
+
+                                    ""
+
+                                ]
+
+                            )
 
                         }
 
-                    </div>
+                    >
+
+                        <Plus className="mr-2 h-4 w-4" />
+
+                        Ajouter
+
+                    </Button>
 
                 </div>
 

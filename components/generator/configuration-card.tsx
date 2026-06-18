@@ -1,8 +1,11 @@
 "use client";
 
+import { Settings } from "lucide-react";
+
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Switch } from "../ui/switch";
 
 interface ConfigurationCardProps {
 
@@ -21,14 +24,121 @@ interface ConfigurationCardProps {
     executor: string;
     setExecutor: (value: string) => void;
 
-    hold: string;
-    setHold: (value: string) => void;
+    hold: boolean;
+    setHold: (value: boolean) => void;
 
-    stopOnAbend: string;
-    setStopOnAbend: (value: string) => void;
+    stopOnAbend: boolean;
+    setStopOnAbend: (value: boolean) => void;
 
     changeUser: string;
     setChangeUser: (value: string) => void;
+
+}
+
+function Field({
+
+    label,
+
+    value,
+
+    onChange
+
+}: {
+
+    label: string;
+
+    value: string;
+
+    onChange: (value: string) => void;
+
+}) {
+
+    return (
+
+        <div className="space-y-2">
+
+            <Label className="text-zinc-400">
+
+                {label}
+
+            </Label>
+
+            <Input
+
+                value={value}
+
+                onChange={(e) => onChange(e.target.value)}
+
+                className="
+                    h-12
+                    rounded-2xl
+                    border-zinc-800
+                    bg-zinc-950/70
+                    text-zinc-200
+                    focus-visible:ring-violet-500
+                "
+
+            />
+
+        </div>
+
+    );
+
+}
+
+function Toggle({
+
+    title,
+
+    description,
+
+    value,
+
+    onChange
+
+}: {
+
+    title: string;
+
+    description: string;
+
+    value: boolean;
+
+    onChange: (value: boolean) => void;
+
+}) {
+
+    return (
+
+        <div className="flex items-center justify-between rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
+
+            <div>
+
+                <div className="font-medium text-white">
+
+                    {title}
+
+                </div>
+
+                <div className="mt-1 text-sm text-zinc-500">
+
+                    {description}
+
+                </div>
+
+            </div>
+
+            <Switch
+
+                checked={value}
+
+                onCheckedChange={onChange}
+
+            />
+
+        </div>
+
+    );
 
 }
 
@@ -62,143 +172,119 @@ export default function ConfigurationCard({
 
     return (
 
-        <Card className="rounded-2xl border-zinc-800 bg-zinc-900 p-6">
+        <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl">
 
-            <h2 className="mb-6 text-xl font-bold">
+            <div className="mb-8 flex items-center gap-4">
 
-                ⚙ Configuration
+                <div className="rounded-2xl bg-violet-500/10 p-3">
 
-            </h2>
-
-            <div className="space-y-4">
-
-                <div>
-
-                    <Label>Job Name</Label>
-
-                    <Input
-
-                        value={jobName}
-
-                        onChange={(e) => setJobName(e.target.value)}
-
-                        className="mt-2 border-zinc-800 bg-zinc-950"
-
-                    />
+                    <Settings className="h-6 w-6 text-violet-400" />
 
                 </div>
 
                 <div>
 
-                    <Label>Volume</Label>
+                    <h2 className="text-2xl font-bold text-white">
 
-                    <Input
+                        Configuration
 
-                        value={volume}
+                    </h2>
 
-                        onChange={(e) => setVolume(e.target.value)}
+                    <div className="text-zinc-500">
 
-                        className="mt-2 border-zinc-800 bg-zinc-950"
+                        Définissez les paramètres du job
 
-                    />
-
-                </div>
-
-                <div>
-
-                    <Label>Script IN</Label>
-
-                    <Input
-
-                        value={scriptIn}
-
-                        onChange={(e) => setScriptIn(e.target.value)}
-
-                        className="mt-2 border-zinc-800 bg-zinc-950"
-
-                    />
+                    </div>
 
                 </div>
 
-                <div>
+            </div>
 
-                    <Label>Output</Label>
+            <div className="space-y-6">
 
-                    <Input
+                <Field
 
-                        value={output}
+                    label="Nom du job"
 
-                        onChange={(e) => setOutput(e.target.value)}
+                    value={jobName}
 
-                        className="mt-2 border-zinc-800 bg-zinc-950"
+                    onChange={setJobName}
 
-                    />
+                />
 
-                </div>
+                <Field
 
-                <div>
+                    label="Volume"
 
-                    <Label>Executor</Label>
+                    value={volume}
 
-                    <Input
+                    onChange={setVolume}
 
-                        value={executor}
+                />
 
-                        onChange={(e) => setExecutor(e.target.value)}
+                <Field
 
-                        className="mt-2 border-zinc-800 bg-zinc-950"
+                    label="Script IN"
 
-                    />
+                    value={scriptIn}
 
-                </div>
+                    onChange={setScriptIn}
 
-                <div>
+                />
 
-                    <Label>Hold</Label>
+                <Field
 
-                    <Input
+                    label="Output"
 
-                        value={hold}
+                    value={output}
 
-                        onChange={(e) => setHold(e.target.value)}
+                    onChange={setOutput}
 
-                        className="mt-2 border-zinc-800 bg-zinc-950"
+                />
 
-                    />
+                <Field
 
-                </div>
+                    label="Executor"
 
-                <div>
+                    value={executor}
 
-                    <Label>Stop on Abend</Label>
+                    onChange={setExecutor}
 
-                    <Input
+                />
 
-                        value={stopOnAbend}
+                <Toggle
 
-                        onChange={(e) => setStopOnAbend(e.target.value)}
+                    title="Hold après création"
 
-                        className="mt-2 border-zinc-800 bg-zinc-950"
+                    description="Le job restera en attente jusqu'à son démarrage manuel"
 
-                    />
+                    value={hold}
 
-                </div>
+                    onChange={setHold}
 
-                <div>
+                />
 
-                    <Label>ChangeUser</Label>
+                <Toggle
 
-                    <Input
+                    title="Protection Abend"
 
-                        value={changeUser}
+                    description="Arrêter automatiquement le job en cas d'erreur"
 
-                        onChange={(e) => setChangeUser(e.target.value)}
+                    value={stopOnAbend}
 
-                        className="mt-2 border-zinc-800 bg-zinc-950"
+                    onChange={setStopOnAbend}
 
-                    />
+                />
 
-                </div>
+                <Field
+
+                    label="Change User"
+
+                    value={changeUser}
+
+                    onChange={setChangeUser}
+
+                />
 
             </div>
 

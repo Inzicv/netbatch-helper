@@ -7,6 +7,7 @@ import Header from "@/components/header";
 import ModelCard from "@/components/generator/model-card";
 import ConfigurationCard from "@/components/generator/configuration-card";
 import EveryCard from "@/components/generator/every-card";
+import DependencyCard from "@/components/dependency-card";
 import PreviewCard from "@/components/generator/preview-card";
 
 import { loadJobModel } from "@/lib/generator";
@@ -23,13 +24,17 @@ export default function GeneratorPage() {
 
     const [executor, setExecutor] = useState("");
 
-    const [hold, setHold] = useState("");
+    const [hold, setHold] = useState(true);
 
-    const [stopOnAbend, setStopOnAbend] = useState("");
+    const [stopOnAbend, setStopOnAbend] = useState(true);
 
     const [changeUser, setChangeUser] = useState("");
 
     const [every, setEvery] = useState("");
+
+    const [waitFor, setWaitFor] = useState<string[]>([]);
+
+    const [after, setAfter] = useState<string[]>([]);
 
     function loadModel(query: string) {
 
@@ -73,13 +78,13 @@ export default function GeneratorPage() {
 
         setHold(
 
-            job.parameters["SET HOLD"] || ""
+            (job.parameters["SET HOLD"] || "").toUpperCase() === "ON"
 
         );
 
         setStopOnAbend(
 
-            job.parameters["SET STOP-ON-ABEND"] || ""
+            (job.parameters["SET STOP-ON-ABEND"] || "").toUpperCase() === "ON"
 
         );
 
@@ -92,6 +97,42 @@ export default function GeneratorPage() {
         setEvery(
 
             job.parameters["SET EVERY"] || ""
+
+        );
+
+        setWaitFor(
+
+            job.parameters["WAITON"]
+
+                ? job.parameters["WAITON"]
+
+                    .split(",")
+
+                    .map(
+
+                        x => x.trim()
+
+                    )
+
+                : []
+
+        );
+
+        setAfter(
+
+            job.parameters["AFTER"]
+
+                ? job.parameters["AFTER"]
+
+                    .split(",")
+
+                    .map(
+
+                        x => x.trim()
+
+                    )
+
+                : []
 
         );
 
@@ -113,9 +154,13 @@ SET EXECUTOR-PROGRAM ${executor}
 
 SET EVERY ${every}
 
-SET HOLD ${hold}
+SET HOLD ${hold ? "ON" : "OFF"}
 
-SET STOP-ON-ABEND ${stopOnAbend}
+SET STOP-ON-ABEND ${stopOnAbend ? "ON" : "OFF"}
+
+${waitFor.length > 0 ? `WAITON ${waitFor.join(",")}` : ""}
+
+${after.length > 0 ? `AFTER ${after.join(",")}` : ""}
 
 ==CHANGEUSER ${changeUser}
 
@@ -139,7 +184,11 @@ SUBMIT ${jobName}`;
 
         stopOnAbend,
 
-        changeUser
+        changeUser,
+
+        waitFor,
+
+        after
 
     ]);
 
@@ -149,21 +198,15 @@ SUBMIT ${jobName}`;
 
             <Header />
 
-            <div className="mx-auto max-w-7xl space-y-6 p-6">
+            <div className="mx-auto max-w-7xl space-y-8 p-6">
 
-                <h1 className="text-4xl font-bold">
+                <ModelCard
 
-                    🧬 Obey Generator
+                    onLoad={loadModel}
 
-                </h1>
+                />
 
-                <div className="grid grid-cols-3 gap-6">
-
-                    <ModelCard
-
-                        onLoad={loadModel}
-
-                    />
+                <div className="grid grid-cols-2 gap-8">
 
                     <ConfigurationCard
 
@@ -202,6 +245,16 @@ SUBMIT ${jobName}`;
                     />
 
                 </div>
+
+                <DependencyCard
+
+                    waitFor={waitFor}
+                    setWaitFor={setWaitFor}
+
+                    after={after}
+                    setAfter={setAfter}
+
+                />
 
                 <PreviewCard
 
