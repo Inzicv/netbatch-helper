@@ -21,9 +21,13 @@ export default function ExplorerPage() {
     const [search, setSearch] = useState("");
 
     const [selectedMonitors, setSelectedMonitors] = useState([
+
         "$ZBAP",
+
         "$ZBAT",
+
         "$ZBAD"
+
     ]);
 
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
@@ -76,13 +80,17 @@ export default function ExplorerPage() {
 
             );
 
-    }, [
+    },
 
-        search,
+        [
 
-        selectedMonitors
+            search,
 
-    ]);
+            selectedMonitors
+
+        ]
+
+    );
 
     const currentJob = selectedJob || results[0] || null;
 
@@ -90,7 +98,11 @@ export default function ExplorerPage() {
 
         ?.split(",")
 
-        .map(x => x.trim())
+        .map(
+
+            x => x.trim()
+
+        )
 
         .filter(Boolean)
 
@@ -100,7 +112,11 @@ export default function ExplorerPage() {
 
         ?.split(",")
 
-        .map(x => x.trim())
+        .map(
+
+            x => x.trim()
+
+        )
 
         .filter(Boolean)
 
@@ -113,8 +129,6 @@ export default function ExplorerPage() {
             <Header />
 
             <div className="mx-auto flex h-[calc(100vh-112px)] max-w-[1800px] gap-8 p-8">
-
-                {/* Sidebar */}
 
                 <div className="flex w-[400px] flex-col gap-6">
 
@@ -193,8 +207,6 @@ export default function ExplorerPage() {
                     </div>
 
                 </div>
-
-                {/* Partie droite */}
 
                 <div className="flex-1 overflow-y-auto pr-2">
 
@@ -289,8 +301,10 @@ export default function ExplorerPage() {
                                 <DependencyCard
 
                                     waitFor={waitFor}
+                                    setWaitFor={() => { }}
 
-                                    blockedByThis={blockedByThis}
+                                    after={blockedByThis}
+                                    setAfter={() => { }}
 
                                 />
 
