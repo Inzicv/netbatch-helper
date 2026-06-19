@@ -1,5 +1,19 @@
-export function getNextRun(_: string): string {
+import { CronExpressionParser } from "cron-parser";
 
-    return "";
+export function getNextRun(cron: string): string {
+    if (!cron) {
+        return "-";
+    }
 
+    try {
+        const interval = CronExpressionParser.parse(cron);
+        const nextDate = interval.next().toDate();
+
+        return nextDate.toLocaleString("fr-FR", {
+            dateStyle: "short",
+            timeStyle: "short",
+        });
+    } catch {
+        return "-";
+    }
 }
