@@ -42,3 +42,33 @@ export function verifySessionToken(token: string): string | null {
     
     return null;
 }
+
+// Hash password with PBKDF2
+export function hashPassword(password: string, salt: string): string {
+    return crypto.pbkdf2Sync(password, salt, 100000, 64, "sha512").toString("hex");
+}
+
+// Generate random salt
+export function generateSalt(): string {
+    return crypto.randomBytes(16).toString("hex");
+}
+
+// Verify entered password against stored salt:hash format
+export function verifyPassword(password: string, storedHash: string): boolean {
+    if (!storedHash) return false;
+    
+    try {
+        const parts = storedHash.split(":");
+        if (parts.length !== 2) return false;
+        
+        const [salt, hash] = parts;
+        const computedHash = hashPassword(password, salt);
+        
+        return crypto.timingSafeEqual(
+            Buffer.from(computedHash, "hex"),
+            Buffer.from(hash, "hex")
+        );
+    } catch {
+        return false;
+    }
+}
