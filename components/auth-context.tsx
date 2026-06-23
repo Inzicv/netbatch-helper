@@ -18,14 +18,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
 
     useEffect(() => {
-        // Check for session in localStorage on mount
-        const session = localStorage.getItem("netbatch_auth");
-        if (session === "true") {
-            setIsAuthenticated(true);
-        } else {
+        // Validate session cookie with server on mount
+        const checkSession = async () => {
+            try {
+                const response = await fetch("/api/auth/session");
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.authenticated) {
+                        setIsAuthenticated(true);
+                        setIsLoading(false);
+                        return;
+                    }
+                }
+            } catch {}
             setIsAuthenticated(false);
-        }
-        setIsLoading(false);
+            setIsLoading(false);
+        };
+        checkSession();
     }, []);
 
     useEffect(() => {
@@ -39,21 +48,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, [isAuthenticated, pathname, isLoading, router]);
 
     const login = async (username: string, pass: string): Promise<boolean> => {
-        // Basic credentials check (mocked for reassurance)
-        if (
-            (username.toLowerCase() === "admin" && pass === "HPN0nSt0p!14") ||
-            (username.toLowerCase() === "vincent" && pass === "HPN0nSt0p!13") ||
-            (username.toLowerCase() === "olivier" && pass === "HPN0nSt0p!08")
-        ) {
-            localStorage.setItem("netbatch_auth", "true");
-            setIsAuthenticated(true);
-            return true;
-        }
+        try {
+            const response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password: pass }),
+            });
+            
+            if (response.ok) {
+                setIsAuthenticated(true);
+                return true;
+            }
+        } catch {}
         return false;
     };
 
-    const logout = () => {
-        localStorage.removeItem("netbatch_auth");
+    const logout = async () => {
+        try {
+            await fetch("/api/auth/logout", { method: "POST" });
+        } catch {}
         setIsAuthenticated(false);
         router.replace("/login");
     };
