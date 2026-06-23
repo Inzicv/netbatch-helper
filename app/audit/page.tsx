@@ -24,6 +24,12 @@ export default function AuditPage() {
         "$ZBAT",
         "$ZBAD"
     ]);
+    const [selectedSystems, setSelectedSystems] = useState<string[]>([
+        "ATLAS",
+        "PADME",
+        "ISIS",
+        "LEIA"
+    ]);
     const [hasWaiton, setHasWaiton] = useState<boolean | null>(null); // null = all, true = has it, false = doesn't
     const [hasAfter, setHasAfter] = useState<boolean | null>(null); // null = all, true = has it, false = doesn't
 
@@ -40,9 +46,23 @@ export default function AuditPage() {
         setCurrentPage(1);
     };
 
+    const toggleSystem = (system: string) => {
+        if (selectedSystems.includes(system)) {
+            setSelectedSystems(selectedSystems.filter(s => s !== system));
+        } else {
+            setSelectedSystems([...selectedSystems, system]);
+        }
+        setCurrentPage(1);
+    };
+
     // Filtered Jobs Memo
     const filteredJobs = useMemo(() => {
         return allJobs.filter((job) => {
+            // System check
+            if (!selectedSystems.includes(job.system)) {
+                return false;
+            }
+
             // Monitor check
             if (!selectedMonitors.includes(job.monitor)) {
                 return false;
@@ -82,15 +102,16 @@ export default function AuditPage() {
                 const scriptMatch = (job.parameters["SET IN"] || "").toLowerCase().includes(q);
                 const execMatch = (job.parameters["SET EXECUTOR-PROGRAM"] || "").toLowerCase().includes(q);
                 const everyMatch = (job.parameters["SET EVERY"] || "").toLowerCase().includes(q);
+                const systemMatch = (job.system || "").toLowerCase().includes(q);
 
-                if (!nameMatch && !descMatch && !scriptMatch && !execMatch && !everyMatch) {
+                if (!nameMatch && !descMatch && !scriptMatch && !execMatch && !everyMatch && !systemMatch) {
                     return false;
                 }
             }
 
             return true;
         });
-    }, [allJobs, selectedMonitors, userFilter, hasWaiton, hasAfter, search]);
+    }, [allJobs, selectedMonitors, selectedSystems, userFilter, hasWaiton, hasAfter, search]);
 
     // Paginated results memo
     const paginatedJobs = useMemo(() => {
@@ -101,8 +122,9 @@ export default function AuditPage() {
     const totalPages = Math.ceil(filteredJobs.length / itemsPerPage) || 1;
 
     const handleExportCSV = () => {
-        const headers = ["Numéro", "Nom", "Monitor", "User", "Description", "Script", "Executor", "EVERY", "WAITON", "AFTER"];
+        const headers = ["Système", "Numéro", "Nom", "Monitor", "User", "Description", "Script", "Executor", "EVERY", "WAITON", "AFTER"];
         const rows = filteredJobs.map(job => [
+            job.system,
             job.job_number ?? "",
             job.job_name,
             job.monitor,
@@ -136,6 +158,7 @@ export default function AuditPage() {
         setSearch("");
         setUserFilter("");
         setSelectedMonitors(["$ZBAP", "$ZBAT", "$ZBAD"]);
+        setSelectedSystems(["ATLAS", "PADME", "ISIS", "LEIA"]);
         setHasWaiton(null);
         setHasAfter(null);
         setCurrentPage(1);
@@ -164,7 +187,7 @@ export default function AuditPage() {
                             Audit & Recherche Globale
                         </h1>
                         <p className="mt-1 text-sm text-zinc-400">
-                            Recherchez, filtrez et exportez l&apos;intégralité des jobs référencés dans la base.
+                            Recherchez, filtrez et exportez l&apos;intégralité des jobs référencés dans la base multi-systèmes.
                         </p>
                     </div>
                     <div className="flex gap-3">
@@ -193,7 +216,7 @@ export default function AuditPage() {
                         <h2 className="font-semibold text-lg">Filtres de recherche</h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                         {/* TEXT SEARCH */}
                         <div className="space-y-2">
                             <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
@@ -234,6 +257,31 @@ export default function AuditPage() {
                             </div>
                         </div>
 
+                        {/* SYSTEMS */}
+                        <div className="space-y-2">
+                            <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block">
+                                Systèmes
+                            </label>
+                            <div className="flex gap-2 pt-1">
+                                {["ATLAS", "PADME", "ISIS", "LEIA"].map((sys) => {
+                                    const selected = selectedSystems.includes(sys);
+                                    return (
+                                        <button
+                                            key={sys}
+                                            onClick={() => toggleSystem(sys)}
+                                            className={`flex-1 rounded-xl py-2 px-1 text-[10px] md:text-xs font-semibold transition-all border ${
+                                                selected
+                                                    ? "bg-violet-600/10 border-violet-500/50 text-violet-300"
+                                                    : "bg-zinc-950 border-zinc-800 text-zinc-500 hover:text-zinc-300"
+                                            }`}
+                                        >
+                                            {sys}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+
                         {/* MONITORS */}
                         <div className="space-y-2">
                             <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block">
@@ -263,7 +311,7 @@ export default function AuditPage() {
                         <div className="grid grid-cols-2 gap-3">
                             <div className="space-y-2">
                                 <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block">
-                                    Dépendance WAITON
+                                    WAITON
                                 </label>
                                 <select
                                     value={hasWaiton === null ? "all" : String(hasWaiton)}
@@ -275,14 +323,14 @@ export default function AuditPage() {
                                     className="w-full rounded-xl border border-zinc-800 bg-zinc-950 py-2.5 px-3 text-sm text-white focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all"
                                 >
                                     <option value="all">Tous</option>
-                                    <option value="true">Avec WAITON</option>
-                                    <option value="false">Sans WAITON</option>
+                                    <option value="true">Avec</option>
+                                    <option value="false">Sans</option>
                                 </select>
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block">
-                                    Dépendance AFTER
+                                    AFTER
                                 </label>
                                 <select
                                     value={hasAfter === null ? "all" : String(hasAfter)}
@@ -294,8 +342,8 @@ export default function AuditPage() {
                                     className="w-full rounded-xl border border-zinc-800 bg-zinc-950 py-2.5 px-3 text-sm text-white focus:border-violet-500 focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all"
                                 >
                                     <option value="all">Tous</option>
-                                    <option value="true">Avec AFTER</option>
-                                    <option value="false">Sans AFTER</option>
+                                    <option value="true">Avec</option>
+                                    <option value="false">Sans</option>
                                 </select>
                             </div>
                         </div>
@@ -308,6 +356,7 @@ export default function AuditPage() {
                         <table className="w-full min-w-[1000px] border-collapse text-left text-sm text-zinc-300">
                             <thead>
                                 <tr className="border-b border-zinc-800 bg-[#151518] text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                                    <th className="py-4 px-6 w-28">Système</th>
                                     <th className="py-4 px-6 w-20">Numéro</th>
                                     <th className="py-4 px-6 w-44">Nom Job</th>
                                     <th className="py-4 px-6 w-28">Monitor</th>
@@ -321,7 +370,7 @@ export default function AuditPage() {
                             <tbody className="divide-y divide-zinc-850">
                                 {paginatedJobs.length === 0 ? (
                                     <tr>
-                                        <td colSpan={8} className="py-12 text-center text-zinc-500 font-medium">
+                                        <td colSpan={9} className="py-12 text-center text-zinc-500 font-medium">
                                             Aucun job ne correspond aux critères de recherche actuels.
                                         </td>
                                     </tr>
@@ -335,9 +384,12 @@ export default function AuditPage() {
 
                                         return (
                                             <tr 
-                                                key={`${job.monitor}_${job.job_name}`}
+                                                key={`${job.system}.${job.monitor}.${job.job_name}`}
                                                 className="hover:bg-zinc-900/40 transition-colors group"
                                             >
+                                                <td className="py-4 px-6 font-semibold text-violet-400">
+                                                    {job.system}
+                                                </td>
                                                 <td className="py-4 px-6 font-mono text-xs text-zinc-500">
                                                     {job.job_number ?? "-"}
                                                 </td>

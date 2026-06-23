@@ -93,6 +93,11 @@ export default function AdminPage() {
     async function handleSave() {
         if (!activeJobKey || !activeJob) return;
 
+        if (!editSystem.trim()) {
+            toast.error("Le système est obligatoire");
+            return;
+        }
+
         if (!editJobName.trim()) {
             toast.error("Le nom du job est obligatoire");
             return;
@@ -113,6 +118,7 @@ export default function AdminPage() {
             const parsed = parseObeyText(editObeyForm);
 
             const updatedJob: Job = {
+                system: editSystem.trim().toUpperCase(),
                 job_name: editJobName.trim().toUpperCase(),
                 job_number: Number(editJobNumber),
                 monitor: editMonitor.trim().toUpperCase(),
@@ -205,8 +211,14 @@ export default function AdminPage() {
     async function handleAddJob(e: React.FormEvent) {
         e.preventDefault();
 
+        const cleanSystem = newSystem.trim().toUpperCase();
         const cleanName = newJobName.trim().toUpperCase();
         const cleanMonitor = newMonitor.trim().toUpperCase();
+
+        if (!cleanSystem) {
+            toast.error("Le système est obligatoire");
+            return;
+        }
 
         if (!cleanName) {
             toast.error("Le nom du job est obligatoire");
@@ -248,6 +260,7 @@ export default function AdminPage() {
             }
 
             const newJob: Job = {
+                system: cleanSystem,
                 job_name: cleanName,
                 job_number: Number(newJobNumber),
                 monitor: cleanMonitor,
@@ -296,6 +309,34 @@ export default function AdminPage() {
                             <div className="mt-4">
                                 <MonitorFilters selectedMonitors={selectedMonitors} toggleMonitor={toggleMonitor} />
                             </div>
+                            <div className="mt-4 border-t border-zinc-800 pt-4">
+                                <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block mb-2">Système</span>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {["ATLAS", "PADME", "ISIS", "LEIA"].map((sys) => {
+                                        const selected = selectedSystems.includes(sys);
+                                        return (
+                                            <button
+                                                key={sys}
+                                                type="button"
+                                                onClick={() => {
+                                                    if (selectedSystems.includes(sys)) {
+                                                        setSelectedSystems(selectedSystems.filter(s => s !== sys));
+                                                    } else {
+                                                        setSelectedSystems([...selectedSystems, sys]);
+                                                    }
+                                                }}
+                                                className={`rounded-xl py-1.5 px-3 text-xs font-semibold border transition-all ${
+                                                    selected
+                                                        ? "bg-violet-600/10 border-violet-500/50 text-violet-300"
+                                                        : "bg-[#161619] border-zinc-800 text-zinc-500 hover:text-zinc-300"
+                                                }`}
+                                            >
+                                                {sys}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
                         </div>
 
                         <div className="flex-1 space-y-4 overflow-y-auto pr-2">
@@ -305,7 +346,7 @@ export default function AdminPage() {
                                 <div className="text-center py-8 text-zinc-500">Aucun job trouvé</div>
                             ) : (
                                 filteredJobs.map((job) => {
-                                    const jobKey = `${job.monitor}_${job.job_name}`;
+                                    const jobKey = `${job.system}.${job.monitor}.${job.job_name}`;
                                     return (
                                         <JobCard
                                             key={jobKey}
@@ -314,6 +355,7 @@ export default function AdminPage() {
                                             script={job.parameters["SET IN"] || ""}
                                             user={job.parameters["==CHANGEUSER"] || ""}
                                             monitor={job.monitor}
+                                            system={job.system}
                                             onClick={() => {
                                                 setSelectedJobKey(jobKey);
                                                 setShowAddForm(false);
@@ -352,7 +394,20 @@ export default function AdminPage() {
                             </div>
 
                             <form onSubmit={handleAddJob} className="space-y-6">
-                                <div className="grid grid-cols-3 gap-6">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                    <div className="space-y-2">
+                                        <Label className="text-zinc-400">Système *</Label>
+                                        <select
+                                            value={newSystem}
+                                            onChange={(e) => setNewSystem(e.target.value)}
+                                            className="w-full h-12 rounded-xl border border-zinc-800 bg-zinc-950 px-4 text-zinc-300 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                            required
+                                        >
+                                            {["ATLAS", "PADME", "ISIS", "LEIA"].map((sys) => (
+                                                <option key={sys} value={sys}>{sys}</option>
+                                            ))}
+                                        </select>
+                                    </div>
                                     <div className="space-y-2">
                                         <Label className="text-zinc-400">Nom du job *</Label>
                                         <Input
@@ -417,8 +472,8 @@ export default function AdminPage() {
                                             >
                                                 <option value="">-- Choisir un job --</option>
                                                 {allJobs.map((j) => (
-                                                    <option key={`${j.monitor}_${j.job_name}`} value={`${j.monitor}_${j.job_name}`}>
-                                                        {j.monitor} • {j.job_name} (#{j.job_number})
+                                                    <option key={`${j.system}.${j.monitor}.${j.job_name}`} value={`${j.system}.${j.monitor}.${j.job_name}`}>
+                                                        {j.system} • {j.monitor} • {j.job_name} (#{j.job_number})
                                                     </option>
                                                 ))}
                                             </select>
@@ -490,7 +545,19 @@ export default function AdminPage() {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-3 gap-6 mt-8">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+                                    <div className="space-y-2">
+                                        <Label className="text-zinc-400">Système</Label>
+                                        <select
+                                            value={editSystem}
+                                            onChange={(e) => setEditSystem(e.target.value)}
+                                            className="w-full h-12 rounded-xl border border-zinc-800 bg-zinc-950 px-4 text-zinc-300 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                                        >
+                                            {["ATLAS", "PADME", "ISIS", "LEIA"].map((sys) => (
+                                                <option key={sys} value={sys}>{sys}</option>
+                                            ))}
+                                        </select>
+                                    </div>
                                     <div className="space-y-2">
                                         <Label className="text-zinc-400">Nom du job</Label>
                                         <Input
