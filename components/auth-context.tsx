@@ -41,9 +41,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const login = async (username: string, pass: string): Promise<boolean> => {
         // Basic credentials check (mocked for reassurance)
         if (
-            (username.toLowerCase() === "admin" && pass === "netbatch2026") ||
-            (username.toLowerCase() === "operator" && pass === "HPNonStop") ||
-            (username.toLowerCase() === "netbatch" && pass === "helper")
+            (username.toLowerCase() === "admin" && pass === "HPN0nSt0p!14") ||
+            (username.toLowerCase() === "vincent" && pass === "HPN0nSt0p!13") ||
+            (username.toLowerCase() === "olivier" && pass === "HPN0nSt0p!08")
         ) {
             localStorage.setItem("netbatch_auth", "true");
             setIsAuthenticated(true);
