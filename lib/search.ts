@@ -6,9 +6,9 @@ import { Job, JobsDatabase } from "@/lib/types";
 
 const jobs = jobsData as JobsDatabase;
 
-const nameIndex = nameIndexData as Record<string, string[]>;
+const nameIndex = nameIndexData as unknown as Record<string, string[]>;
 
-const numberIndex = numberIndexData as Record<string, string>;
+const numberIndex = numberIndexData as unknown as Record<string, string>;
 
 export function searchJobs(query: string): Job[] {
 
