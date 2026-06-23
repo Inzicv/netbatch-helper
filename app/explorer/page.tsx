@@ -307,6 +307,8 @@ export default function ExplorerPage() {
                                     after={blockedByThis}
                                     setAfter={() => { }}
 
+                                    readOnly={true}
+
                                 />
 
                                 <ObeyCard

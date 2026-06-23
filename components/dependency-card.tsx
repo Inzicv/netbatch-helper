@@ -14,6 +14,8 @@ interface DependencyCardProps {
     after: string[];
     setAfter: (value: string[]) => void;
 
+    readOnly?: boolean;
+
 }
 
 export default function DependencyCard({
@@ -22,7 +24,9 @@ export default function DependencyCard({
     setWaitFor,
 
     after,
-    setAfter
+    setAfter,
+
+    readOnly = false
 
 }: DependencyCardProps) {
 
@@ -100,101 +104,143 @@ export default function DependencyCard({
 
                     {
 
-                        waitFor.map(
+                        readOnly ? (
 
-                            (job, index) => (
+                            <div className="space-y-3">
 
-                                <div
+                                {waitFor.length > 0 ? (
 
-                                    key={index}
+                                    waitFor.map((job, index) => (
 
-                                    className="flex gap-3"
+                                        <div
+
+                                            key={index}
+
+                                            className="flex h-12 items-center rounded-xl border border-zinc-800/70 bg-zinc-950 px-4 font-mono text-sm text-zinc-300"
+
+                                        >
+
+                                            {job}
+
+                                        </div>
+
+                                    ))
+
+                                ) : (
+
+                                    <div className="text-zinc-600 italic text-sm">Aucun job attendu</div>
+
+                                )}
+
+                            </div>
+
+                        ) : (
+
+                            <>
+
+                                {
+
+                                    waitFor.map(
+
+                                        (job, index) => (
+
+                                            <div
+
+                                                key={index}
+
+                                                className="flex gap-3"
+
+                                            >
+
+                                                <Input
+
+                                                    value={job}
+
+                                                    onChange={(e) =>
+
+                                                        update(
+
+                                                            waitFor,
+
+                                                            setWaitFor,
+
+                                                            index,
+
+                                                            e.target.value
+
+                                                        )
+
+                                                    }
+
+                                                    className="border-zinc-800 bg-zinc-950"
+
+                                                />
+
+                                                <Button
+
+                                                    variant="destructive"
+
+                                                    onClick={() =>
+
+                                                        remove(
+
+                                                            waitFor,
+
+                                                            setWaitFor,
+
+                                                            index
+
+                                                        )
+
+                                                    }
+
+                                                >
+
+                                                    <Trash2 className="h-4 w-4" />
+
+                                                </Button>
+
+                                            </div>
+
+                                        )
+
+                                    )
+
+                                }
+
+                                <Button
+
+                                    variant="secondary"
+
+                                    onClick={() =>
+
+                                        setWaitFor(
+
+                                            [
+
+                                                ...waitFor,
+
+                                                ""
+
+                                            ]
+
+                                        )
+
+                                    }
 
                                 >
 
-                                    <Input
+                                    <Plus className="mr-2 h-4 w-4" />
 
-                                        value={job}
+                                    Ajouter
 
-                                        onChange={(e) =>
+                                </Button>
 
-                                            update(
-
-                                                waitFor,
-
-                                                setWaitFor,
-
-                                                index,
-
-                                                e.target.value
-
-                                            )
-
-                                        }
-
-                                        className="border-zinc-800 bg-zinc-950"
-
-                                    />
-
-                                    <Button
-
-                                        variant="destructive"
-
-                                        onClick={() =>
-
-                                            remove(
-
-                                                waitFor,
-
-                                                setWaitFor,
-
-                                                index
-
-                                            )
-
-                                        }
-
-                                    >
-
-                                        <Trash2 className="h-4 w-4" />
-
-                                    </Button>
-
-                                </div>
-
-                            )
+                            </>
 
                         )
 
                     }
-
-                    <Button
-
-                        variant="secondary"
-
-                        onClick={() =>
-
-                            setWaitFor(
-
-                                [
-
-                                    ...waitFor,
-
-                                    ""
-
-                                ]
-
-                            )
-
-                        }
-
-                    >
-
-                        <Plus className="mr-2 h-4 w-4" />
-
-                        Ajouter
-
-                    </Button>
 
                 </div>
 
@@ -208,101 +254,143 @@ export default function DependencyCard({
 
                     {
 
-                        after.map(
+                        readOnly ? (
 
-                            (job, index) => (
+                            <div className="space-y-3">
 
-                                <div
+                                {after.length > 0 ? (
 
-                                    key={index}
+                                    after.map((job, index) => (
 
-                                    className="flex gap-3"
+                                        <div
+
+                                            key={index}
+
+                                            className="flex h-12 items-center rounded-xl border border-zinc-800/70 bg-zinc-950 px-4 font-mono text-sm text-zinc-300"
+
+                                        >
+
+                                            {job}
+
+                                        </div>
+
+                                    ))
+
+                                ) : (
+
+                                    <div className="text-zinc-600 italic text-sm">Aucun job déclenché</div>
+
+                                )}
+
+                            </div>
+
+                        ) : (
+
+                            <>
+
+                                {
+
+                                    after.map(
+
+                                        (job, index) => (
+
+                                            <div
+
+                                                key={index}
+
+                                                className="flex gap-3"
+
+                                            >
+
+                                                <Input
+
+                                                    value={job}
+
+                                                    onChange={(e) =>
+
+                                                        update(
+
+                                                            after,
+
+                                                            setAfter,
+
+                                                            index,
+
+                                                            e.target.value
+
+                                                        )
+
+                                                    }
+
+                                                    className="border-zinc-800 bg-zinc-950"
+
+                                                />
+
+                                                <Button
+
+                                                    variant="destructive"
+
+                                                    onClick={() =>
+
+                                                        remove(
+
+                                                            after,
+
+                                                            setAfter,
+
+                                                            index
+
+                                                        )
+
+                                                    }
+
+                                                >
+
+                                                    <Trash2 className="h-4 w-4" />
+
+                                                </Button>
+
+                                            </div>
+
+                                        )
+
+                                    )
+
+                                }
+
+                                <Button
+
+                                    variant="secondary"
+
+                                    onClick={() =>
+
+                                        setAfter(
+
+                                            [
+
+                                                ...after,
+
+                                                ""
+
+                                            ]
+
+                                        )
+
+                                    }
 
                                 >
 
-                                    <Input
+                                    <Plus className="mr-2 h-4 w-4" />
 
-                                        value={job}
+                                    Ajouter
 
-                                        onChange={(e) =>
+                                </Button>
 
-                                            update(
-
-                                                after,
-
-                                                setAfter,
-
-                                                index,
-
-                                                e.target.value
-
-                                            )
-
-                                        }
-
-                                        className="border-zinc-800 bg-zinc-950"
-
-                                    />
-
-                                    <Button
-
-                                        variant="destructive"
-
-                                        onClick={() =>
-
-                                            remove(
-
-                                                after,
-
-                                                setAfter,
-
-                                                index
-
-                                            )
-
-                                        }
-
-                                    >
-
-                                        <Trash2 className="h-4 w-4" />
-
-                                    </Button>
-
-                                </div>
-
-                            )
+                            </>
 
                         )
 
                     }
-
-                    <Button
-
-                        variant="secondary"
-
-                        onClick={() =>
-
-                            setAfter(
-
-                                [
-
-                                    ...after,
-
-                                    ""
-
-                                ]
-
-                            )
-
-                        }
-
-                    >
-
-                        <Plus className="mr-2 h-4 w-4" />
-
-                        Ajouter
-
-                    </Button>
 
                 </div>
 
