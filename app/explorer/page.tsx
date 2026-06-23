@@ -12,12 +12,14 @@ import PlanningCard from "@/components/planning-card";
 import DependencyCard from "@/components/dependency-card";
 import ObeyCard from "@/components/obey-card";
 
-import { searchJobs } from "@/lib/search";
 import { translateEvery } from "@/lib/every";
 import { getNextRun } from "@/lib/next-run";
 import { Job } from "@/lib/types";
+import { useDatabase } from "@/components/database-context";
 
 export default function ExplorerPage() {
+
+    const { searchJobs, loading } = useDatabase();
 
     const [search, setSearch] = useState("");
 
@@ -87,7 +89,9 @@ export default function ExplorerPage() {
 
             search,
 
-            selectedMonitors
+            selectedMonitors,
+
+            searchJobs
 
         ]
 
@@ -122,6 +126,17 @@ export default function ExplorerPage() {
         .filter(Boolean)
 
         || [];
+
+    if (loading) {
+        return (
+            <div className="h-screen bg-[#09090b] text-white flex items-center justify-center">
+                <div className="text-center space-y-4">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-500 mx-auto"></div>
+                    <div className="text-zinc-400">Chargement de la base de données...</div>
+                </div>
+            </div>
+        );
+    }
 
     return (
 

@@ -197,12 +197,8 @@ Importer :
   ou
 * un job existant
 
-Générer automatiquement :
+NUmero du job doit etre demandé obligatoirement.
 
-* numéro
-* index
-
-Priorité : MOYENNE
 
 ---
 

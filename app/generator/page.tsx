@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import Header from "@/components/header";
 
@@ -10,11 +10,13 @@ import EveryCard from "@/components/generator/every-card";
 import DependencyCard from "@/components/dependency-card";
 import PreviewCard from "@/components/generator/preview-card";
 
-import { loadJobModel } from "@/lib/generator";
 import { buildObey } from "@/lib/build-obey";
 import { Job } from "@/lib/types";
+import { useDatabase } from "@/components/database-context";
 
 export default function GeneratorPage() {
+
+    const { jobs, searchJobs, loading } = useDatabase();
 
     const [loadedModel, setLoadedModel] = useState<Job | null>(null);
 
@@ -40,9 +42,17 @@ export default function GeneratorPage() {
 
     const [after, setAfter] = useState<string[]>([]);
 
-    function loadModel(query: string) {
+    const loadModel = useCallback((query: string) => {
 
-        const job = loadJobModel(query);
+        if (!query) return;
+        const upperQuery = query.toUpperCase();
+        let job = Object.values(jobs).find(j => j.job_name.toUpperCase() === upperQuery);
+        if (!job) {
+            const results = searchJobs(query);
+            if (results.length > 0) {
+                job = results[0];
+            }
+        }
 
         if (!job) {
 
@@ -142,7 +152,7 @@ export default function GeneratorPage() {
 
         );
 
-    }
+    }, [jobs, searchJobs]);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
@@ -154,7 +164,7 @@ export default function GeneratorPage() {
                 }, 0);
             }
         }
-    }, []);
+    }, [loadModel]);
 
     const obey = useMemo(() => {
 
@@ -205,6 +215,17 @@ export default function GeneratorPage() {
         after
 
     ]);
+
+    if (loading) {
+        return (
+            <div className="h-screen bg-[#09090b] text-white flex items-center justify-center">
+                <div className="text-center space-y-4">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-500 mx-auto"></div>
+                    <div className="text-zinc-400">Chargement de la base de données...</div>
+                </div>
+            </div>
+        );
+    }
 
     return (
 

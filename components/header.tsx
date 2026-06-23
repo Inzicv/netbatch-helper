@@ -9,7 +9,9 @@ import {
 
     Dna,
 
-    WandSparkles
+    WandSparkles,
+
+    Settings
 
 } from "lucide-react";
 
@@ -118,6 +120,43 @@ export default function Header() {
                             <span className="font-semibold">
 
                                 Generator
+
+                            </span>
+
+                        </div>
+
+                    </Link>
+
+                    <Link
+
+                        href="/admin"
+
+                        className={`
+                            flex items-center gap-3 rounded-2xl px-6 py-3 transition-all duration-300
+                            ${
+                                pathname === "/admin"
+
+                                    ? "bg-violet-600 text-white shadow-[0_0_25px_rgba(124,58,237,.4)]"
+
+                                    : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                            }
+                        `}
+
+                    >
+
+                        <Settings className="h-5 w-5" />
+
+                        <div className="flex flex-col leading-none">
+
+                            <span className="text-xs">
+
+                                Administration
+
+                            </span>
+
+                            <span className="font-semibold">
+
+                                Database
 
                             </span>
 
