@@ -1,214 +1,22 @@
-# ROADMAP / TODO – NetBatch Helper
+# ROADMAP / TODO 
 
-## BUG BLOQUANT
+# PRIORITE 1
 
-### Erreur de build
+Make the whole application fully responsive and adaptive, with behavior similar to Notion, Cursor and ChatGPT.
 
-Le fichier :
+The interface must work naturally on:
 
-lib/next-run.ts
+Mobile
+Tablet
+Laptop
+Ultra-wide screens
+2K and 4K displays
 
-importe :
+No fixed width should limit the available space.
 
-```ts
-import { CronExpressionParser } from "cron-parser";
-```
+# PRIORITE 2
 
-mais le module n'est pas installé ou ses types ne sont pas disponibles.
-
-Objectif :
-
-* Corriger l'erreur de build.
-* Vérifier la version compatible de cron-parser.
-* Installer correctement la dépendance.
-* Ou supprimer cette dépendance et utiliser une implémentation interne plus simple.
-
-Priorité : CRITIQUE
-
----
-
-# GENERATOR
-
-## Conservation du modèle complet
-
-Actuellement le Generator reconstruit un OBEY minimal.
-
-Comportement attendu :
-
-* Charger tous les paramètres du modèle.
-
-* Modifier uniquement :
-
-  * Job Name
-  * Volume
-  * Script IN
-  * Output
-  * Executor
-  * Hold
-  * Stop On Abend
-  * ChangeUser
-  * EVERY
-  * WAITON
-  * AFTER
-
-* Tous les autres paramètres doivent être conservés automatiquement.
-
-Le Generator doit fonctionner comme :
-
-Clone du modèle + modifications.
-
-Priorité : HAUTE
-
----
-
-## Bouton "Utiliser comme modèle"
-
-Depuis l'Explorer :
-
-Ajouter un bouton :
-
-"Utiliser comme modèle"
-
-Action :
-
-Ouvrir :
-
-/generator
-
-avec le job sélectionné préchargé.
-
-Exemple :
-
-Explorer → OAPAE0
-
-Cliquer :
-
-Utiliser comme modèle
-
-Le Generator charge automatiquement OAPAE0.
-
-Priorité : HAUTE
-
----
-
-## Gestion complète des dépendances
-
-Conserver :
-
-WAITON
-
-AFTER
-
-dans le modèle.
-
-Permettre :
-
-* ajout
-* suppression
-* édition
-
-Priorité : HAUTE
-
----
-
-## Génération dynamique de l'OBEY
-
-Supprimer la construction statique :
-
-SET VOLUME ...
-SET IN ...
-SET OUT ...
-
-Créer l'OBEY à partir de l'ensemble des paramètres présents dans le job.
-
-Priorité : HAUTE
-
----
-
-# OUTIL ADMINISTRATION BASE
-
-Créer une section :
-
-/admin
-
-ou
-
-/database
-
-avec :
-
-## Recherche
-
-Recherche par :
-
-* nom
-* numéro
-* monitor
-* utilisateur
-
----
-
-## Modification d'un job
-
-Permettre :
-
-* édition des paramètres
-* édition de l'OBEY
-* modification du numéro
-* modification du monitor
-
-Sauvegarde automatique :
-
-jobs.json
-
-name_index.json
-
-number_index.json
-
-sans réimport.
-
-Priorité : HAUTE
-
----
-
-## Suppression d'un job
-
-Bouton :
-
-Supprimer
-
-Avec confirmation.
-
-Mettre à jour :
-
-* jobs.json
-* name_index.json
-* number_index.json
-
-Priorité : HAUTE
-
----
-
-## Ajout d'un job
-
-Importer :
-
-* un OBEY
-  ou
-* un job existant
-
-NUmero du job doit etre demandé obligatoirement.
-
-
----
-
-# OUTIL AUDIT
-
-Créer :
-
-/audit
-
-Objectif :
+Créer fonctionnalités d'audit dans la recherche de l'explorer
 
 Lister tous les jobs.
 
@@ -218,8 +26,7 @@ Filtres :
 * user
 * description
 * script
-* executor
-* EVERY
+* executor* EVERY
 * présence WAITON
 * présence AFTER
 
@@ -246,35 +53,6 @@ CSV
 
 Priorité : HAUTE
 
----
-
-# NEXT RUN
-
-Afficher :
-
-Prochaine exécution
-
-dans :
-
-Explorer
-
-et
-
-Generator.
-
-Compatible avec la syntaxe Batchcom :
-
-* listes
-* plages 1-5
-* plages horaires 8-11,13-19,21
-* mois multiples
-* jours multiples
-
-Ne pas utiliser de syntaxe cron incompatible.
-
-Priorité : MOYENNE
-
----
 
 # V2
 
