@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { DatabaseProvider } from "@/components/database-context";
+import { AuthProvider } from "@/components/auth-context";
 
 import "./globals.css";
 
@@ -34,9 +35,11 @@ export default function RootLayout({
 
             <body className={`${inter.className} bg-[#09090b] text-white antialiased`}>
 
-                <DatabaseProvider>
-                    {children}
-                </DatabaseProvider>
+                <AuthProvider>
+                    <DatabaseProvider>
+                        {children}
+                    </DatabaseProvider>
+                </AuthProvider>
 
             </body>
 

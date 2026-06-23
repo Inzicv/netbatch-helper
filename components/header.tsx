@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/components/auth-context";
 
 import {
 
@@ -13,13 +14,16 @@ import {
 
     Settings,
 
-    ClipboardCheck
+    ClipboardCheck,
+
+    LogOut
 
 } from "lucide-react";
 
 export default function Header() {
 
     const pathname = usePathname();
+    const { logout } = useAuth();
 
     return (
 
@@ -202,6 +206,17 @@ export default function Header() {
                         </div>
 
                     </Link>
+
+                    <button
+                        onClick={logout}
+                        className="flex items-center gap-3 rounded-2xl px-6 py-3 transition-all duration-300 text-zinc-400 hover:bg-rose-950/20 hover:text-rose-400 cursor-pointer"
+                    >
+                        <LogOut className="h-5 w-5" />
+                        <div className="flex flex-col leading-none text-left">
+                            <span className="text-xs">Session</span>
+                            <span className="font-semibold">Quitter</span>
+                        </div>
+                    </button>
 
                 </div>
 
