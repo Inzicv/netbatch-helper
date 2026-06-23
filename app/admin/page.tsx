@@ -29,10 +29,12 @@ export default function AdminPage() {
 
     const [search, setSearch] = useState("");
     const [selectedMonitors, setSelectedMonitors] = useState(["$ZBAP", "$ZBAT", "$ZBAD"]);
+    const [selectedSystems, setSelectedSystems] = useState(["ATLAS", "PADME", "ISIS", "LEIA"]);
     const [selectedJobKey, setSelectedJobKey] = useState<string | null>(null);
     const [sidebarOpen, setSidebarOpen] = useState(true);
 
     // Editing State
+    const [editSystem, setEditSystem] = useState("");
     const [editJobName, setEditJobName] = useState("");
     const [editMonitor, setEditMonitor] = useState("");
     const [editJobNumber, setEditJobNumber] = useState<number | "">("");
@@ -40,6 +42,7 @@ export default function AdminPage() {
 
     // Add Job Dialog/Form State
     const [showAddForm, setShowAddForm] = useState(false);
+    const [newSystem, setNewSystem] = useState("ATLAS");
     const [newJobName, setNewJobName] = useState("");
     const [newMonitor, setNewMonitor] = useState("$ZBAP");
     const [newJobNumber, setNewJobNumber] = useState<number | "">("");
@@ -48,28 +51,34 @@ export default function AdminPage() {
     const [importObeyText, setImportObeyText] = useState("");
 
     const filteredJobs = useMemo(() => {
-        return searchJobs(search).filter(job => selectedMonitors.includes(job.monitor));
-    }, [search, selectedMonitors, searchJobs]);
+        return searchJobs(search).filter(job => 
+            selectedMonitors.includes(job.monitor) && 
+            selectedSystems.includes(job.system)
+        );
+    }, [search, selectedMonitors, selectedSystems, searchJobs]);
 
     // Set first job if none selected
-    const activeJobKey = selectedJobKey || (filteredJobs[0] ? `${filteredJobs[0].monitor}_${filteredJobs[0].job_name}` : null);
+    const activeJobKey = selectedJobKey || (filteredJobs[0] ? `${filteredJobs[0].system}.${filteredJobs[0].monitor}.${filteredJobs[0].job_name}` : null);
     const activeJob = activeJobKey ? jobs[activeJobKey] : null;
 
     // Load active job into edit states
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             if (activeJob) {
+                setEditSystem(activeJob.system);
                 setEditJobName(activeJob.job_name);
                 setEditMonitor(activeJob.monitor);
                 setEditJobNumber(activeJob.job_number || "");
                 setEditObeyForm(activeJob.obey_form || "");
             } else {
+                setEditSystem("");
                 setEditJobName("");
                 setEditMonitor("");
                 setEditJobNumber("");
                 setEditObeyForm("");
             }
         }, 0);
+        return () => clearTimeout(timer);
     }, [activeJob]);
 
     function toggleMonitor(monitor: string) {
