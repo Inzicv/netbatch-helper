@@ -149,7 +149,9 @@ export default function GeneratorPage() {
             const params = new URLSearchParams(window.location.search);
             const modelName = params.get("model");
             if (modelName) {
-                loadModel(modelName);
+                setTimeout(() => {
+                    loadModel(modelName);
+                }, 0);
             }
         }
     }, []);
