@@ -1,121 +1,51 @@
-import jobsData from "@/database/jobs.json";
-import nameIndexData from "@/database/name_index.json";
-import numberIndexData from "@/database/number_index.json";
+import { db } from "@/lib/db";
+import { jobs } from "@/database/schema";
+import { Job } from "@/lib/types";
+import { eq, or, like } from "drizzle-orm";
+import { getAllJobs } from "./jobs";
 
-import { Job, JobsDatabase } from "@/lib/types";
+function toJob(row: any): Job {
+    return {
+        system: row.system,
+        job_name: row.jobName,
+        job_number: row.jobNumber,
+        monitor: row.monitor,
+        parameters: row.parameters,
+        obey_form: row.obeyForm,
+    };
+}
 
-const jobs = jobsData as JobsDatabase;
-
-const nameIndex = nameIndexData as unknown as Record<string, string[]>;
-
-const numberIndex = numberIndexData as unknown as Record<string, string>;
-
-export function searchJobs(query: string): Job[] {
-
+export async function searchJobs(query: string): Promise<Job[]> {
     const search = query.trim().toUpperCase();
 
     if (!search) {
-
-        return Object.values(jobs);
-
+        return getAllJobs();
     }
 
-    //
-    // Recherche par numéro
-    //
-
+    // 1. Recherche par numéro
     if (/^\d+$/.test(search)) {
-
-        for (const key of Object.keys(numberIndex)) {
-
-            if (key.endsWith(`_${search}`)) {
-
-                const jobKey = numberIndex[key];
-
-                if (jobKey in jobs) {
-
-                    return [jobs[jobKey]];
-
-                }
-
-            }
-
+        const num = parseInt(search, 10);
+        const rows = await db.select().from(jobs).where(eq(jobs.jobNumber, num));
+        if (rows.length > 0) {
+            return rows.map(toJob);
         }
-
     }
 
-    //
-    // Recherche exacte par nom
-    //
-
-    if (search in nameIndex) {
-
-        return nameIndex[search]
-
-            .filter((jobKey) => jobKey in jobs)
-
-            .map((jobKey) => jobs[jobKey]);
-
+    // 2. Recherche exacte par nom
+    const exactRows = await db.select().from(jobs).where(eq(jobs.jobName, search));
+    if (exactRows.length > 0) {
+        return exactRows.map(toJob);
     }
 
-    //
-    // Recherche full text
-    //
+    // 3. Recherche full text (LIKE sur nom, obey, et parameters JSON)
+    const likePattern = `%${search}%`;
+    const fullTextRows = await db.select().from(jobs).where(
+        or(
+            like(jobs.jobName, likePattern),
+            like(jobs.obeyForm, likePattern),
+            like(jobs.parameters, likePattern)
+        )
+    );
 
-    return Object.values(jobs).filter((job) => {
-
-        const description = (
-
-            job.parameters["SET DESCRIPTION"] || ""
-
-        ).toUpperCase();
-
-        const scriptIn = (
-
-            job.parameters["SET IN"] || ""
-
-        ).toUpperCase();
-
-        const output = (
-
-            job.parameters["SET OUT"] || ""
-
-        ).toUpperCase();
-
-        const user = (
-
-            job.parameters["==CHANGEUSER"] || ""
-
-        ).toUpperCase();
-
-        const obey = job.obey_form.toUpperCase();
-
-        return (
-
-            job.job_name.toUpperCase().includes(search)
-
-            ||
-
-            description.includes(search)
-
-            ||
-
-            scriptIn.includes(search)
-
-            ||
-
-            output.includes(search)
-
-            ||
-
-            user.includes(search)
-
-            ||
-
-            obey.includes(search)
-
-        );
-
-    });
-
+    return fullTextRows.map(toJob);
 }

@@ -1,26 +1,34 @@
-import jobsData from "@/database/jobs.json";
-import { Job, JobsDatabase } from "@/lib/types";
+import { db } from "@/lib/db";
+import { jobs } from "@/database/schema";
+import { Job } from "@/lib/types";
+import { eq } from "drizzle-orm";
 
-const jobs = jobsData as JobsDatabase;
-
-export function getAllJobs(): Job[] {
-
-    return Object.values(jobs);
-
+function toJob(row: any): Job {
+    return {
+        system: row.system,
+        job_name: row.jobName,
+        job_number: row.jobNumber,
+        monitor: row.monitor,
+        parameters: row.parameters,
+        obey_form: row.obeyForm,
+    };
 }
 
-export function getJob(jobKey: string): Job | undefined {
-
-    return jobs[jobKey];
-
+export async function getAllJobs(): Promise<Job[]> {
+    const rows = await db.select().from(jobs);
+    return rows.map(toJob);
 }
 
-export function getJobByName(jobName: string): Job | undefined {
+export async function getJob(jobKey: string): Promise<Job | undefined> {
+    const [row] = await db.select().from(jobs).where(eq(jobs.id, jobKey)).limit(1);
+    if (!row) return undefined;
+    return toJob(row);
+}
 
-    return Object.values(jobs).find(
-
-        (job) => job.job_name === jobName
-
-    );
-
+export async function getJobByName(jobName: string): Promise<Job | undefined> {
+    // Note: Netbatch-helper can have multiple jobs with the same name across systems.
+    // We return the first one found or undefined.
+    const [row] = await db.select().from(jobs).where(eq(jobs.jobName, jobName)).limit(1);
+    if (!row) return undefined;
+    return toJob(row);
 }

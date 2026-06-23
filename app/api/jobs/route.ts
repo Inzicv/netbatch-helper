@@ -1,45 +1,32 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { db } from "@/lib/db";
+import { jobs } from "@/database/schema";
 import { Job, JobsDatabase } from "@/lib/types";
+import { eq } from "drizzle-orm";
 
-const dbDir = path.join(process.cwd(), "database");
-const jobsPath = path.join(dbDir, "jobs.json");
-const nameIndexPath = path.join(dbDir, "name_index.json");
-const numberIndexPath = path.join(dbDir, "number_index.json");
-
-// Helper to rebuild indexes from jobs database
-function rebuildIndexes(jobs: JobsDatabase) {
-    const nameIndex: Record<string, string[]> = {};
-    const numberIndex: Record<string, string> = {};
-
-    for (const [jobKey, job] of Object.entries(jobs)) {
-        // Name index
-        const name = job.job_name.toUpperCase();
-        if (!nameIndex[name]) {
-            nameIndex[name] = [];
-        }
-        if (!nameIndex[name].includes(jobKey)) {
-            nameIndex[name].push(jobKey);
-        }
-
-        // Number index
-        if (job.job_number !== null && job.job_number !== undefined) {
-            const numKey = `${job.system}.${job.monitor}.${job.job_number}`;
-            numberIndex[numKey] = jobKey;
-        }
+// Helper to construct JobsDatabase object from rows
+function buildJobsDatabase(rows: any[]): JobsDatabase {
+    const jobsDb: JobsDatabase = {};
+    for (const row of rows) {
+        jobsDb[row.id] = {
+            system: row.system,
+            job_name: row.jobName,
+            job_number: row.jobNumber,
+            monitor: row.monitor,
+            parameters: row.parameters,
+            obey_form: row.obeyForm,
+        };
     }
-
-    return { nameIndex, numberIndex };
+    return jobsDb;
 }
 
 // GET all jobs
 export async function GET() {
     try {
-        const fileContent = await fs.readFile(jobsPath, "utf-8");
-        const jobs = JSON.parse(fileContent) as JobsDatabase;
-        return NextResponse.json(jobs);
-    } catch {
+        const rows = await db.select().from(jobs);
+        return NextResponse.json(buildJobsDatabase(rows));
+    } catch (error) {
+        console.error("GET /api/jobs failed:", error);
         return NextResponse.json({ error: "Failed to read database" }, { status: 500 });
     }
 }
@@ -50,29 +37,41 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { oldJobKey, job }: { oldJobKey: string | null; job: Job } = body;
 
-        const fileContent = await fs.readFile(jobsPath, "utf-8");
-        const jobs = JSON.parse(fileContent) as JobsDatabase;
-
         const newJobKey = `${job.system}.${job.monitor}.${job.job_name}`;
 
         // If job key changed, delete the old key
         if (oldJobKey && oldJobKey !== newJobKey) {
-            delete jobs[oldJobKey];
+            await db.delete(jobs).where(eq(jobs.id, oldJobKey));
         }
 
-        // Save the job
-        jobs[newJobKey] = job;
+        // Save the job (upsert)
+        await db.insert(jobs).values({
+            id: newJobKey,
+            system: job.system,
+            monitor: job.monitor,
+            jobName: job.job_name,
+            jobNumber: job.job_number,
+            obeyForm: job.obey_form,
+            parameters: job.parameters,
+        }).onConflictDoUpdate({
+            target: jobs.id,
+            set: {
+                system: job.system,
+                monitor: job.monitor,
+                jobName: job.job_name,
+                jobNumber: job.job_number,
+                obeyForm: job.obey_form,
+                parameters: job.parameters,
+            }
+        });
 
-        // Rebuild indexes
-        const { nameIndex, numberIndex } = rebuildIndexes(jobs);
+        // Fetch all jobs to return updated database
+        const rows = await db.select().from(jobs);
+        const updatedDb = buildJobsDatabase(rows);
 
-        // Write files to disk
-        await fs.writeFile(jobsPath, JSON.stringify(jobs, null, 4), "utf-8");
-        await fs.writeFile(nameIndexPath, JSON.stringify(nameIndex, null, 4), "utf-8");
-        await fs.writeFile(numberIndexPath, JSON.stringify(numberIndex, null, 4), "utf-8");
-
-        return NextResponse.json({ success: true, jobKey: newJobKey, jobs });
-    } catch {
+        return NextResponse.json({ success: true, jobKey: newJobKey, jobs: updatedDb });
+    } catch (error) {
+        console.error("POST /api/jobs failed:", error);
         return NextResponse.json({ error: "Failed to save job" }, { status: 500 });
     }
 }
@@ -87,23 +86,15 @@ export async function DELETE(request: Request) {
             return NextResponse.json({ error: "Missing jobKey" }, { status: 400 });
         }
 
-        const fileContent = await fs.readFile(jobsPath, "utf-8");
-        const jobs = JSON.parse(fileContent) as JobsDatabase;
+        await db.delete(jobs).where(eq(jobs.id, jobKey));
 
-        if (jobKey in jobs) {
-            delete jobs[jobKey];
-        }
+        // Fetch all jobs to return updated database
+        const rows = await db.select().from(jobs);
+        const updatedDb = buildJobsDatabase(rows);
 
-        // Rebuild indexes
-        const { nameIndex, numberIndex } = rebuildIndexes(jobs);
-
-        // Write files to disk
-        await fs.writeFile(jobsPath, JSON.stringify(jobs, null, 4), "utf-8");
-        await fs.writeFile(nameIndexPath, JSON.stringify(nameIndex, null, 4), "utf-8");
-        await fs.writeFile(numberIndexPath, JSON.stringify(numberIndex, null, 4), "utf-8");
-
-        return NextResponse.json({ success: true, jobs });
-    } catch {
+        return NextResponse.json({ success: true, jobs: updatedDb });
+    } catch (error) {
+        console.error("DELETE /api/jobs failed:", error);
         return NextResponse.json({ error: "Failed to delete job" }, { status: 500 });
     }
 }
