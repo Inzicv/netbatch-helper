@@ -18,7 +18,6 @@ import {
     Plus, 
     Save, 
     FileText, 
-    X,
     FolderPlus
 } from "lucide-react";
 import { Job } from "@/lib/types";
@@ -34,7 +33,6 @@ export default function AdminPage() {
     const [editJobName, setEditJobName] = useState("");
     const [editMonitor, setEditMonitor] = useState("");
     const [editJobNumber, setEditJobNumber] = useState<number | "">("");
-    const [editParameters, setEditParameters] = useState<[string, string][]>([]);
     const [editObeyForm, setEditObeyForm] = useState("");
 
     // Add Job Dialog/Form State
@@ -61,13 +59,11 @@ export default function AdminPage() {
                 setEditJobName(activeJob.job_name);
                 setEditMonitor(activeJob.monitor);
                 setEditJobNumber(activeJob.job_number || "");
-                setEditParameters(Object.entries(activeJob.parameters || {}));
                 setEditObeyForm(activeJob.obey_form || "");
             } else {
                 setEditJobName("");
                 setEditMonitor("");
                 setEditJobNumber("");
-                setEditParameters([]);
                 setEditObeyForm("");
             }
         }, 0);
@@ -79,27 +75,6 @@ export default function AdminPage() {
         } else {
             setSelectedMonitors([...selectedMonitors, monitor]);
         }
-    }
-
-    // Parameters modifiers
-    function updateParameterKey(index: number, newKey: string) {
-        const copy = [...editParameters];
-        copy[index][0] = newKey;
-        setEditParameters(copy);
-    }
-
-    function updateParameterValue(index: number, newValue: string) {
-        const copy = [...editParameters];
-        copy[index][1] = newValue;
-        setEditParameters(copy);
-    }
-
-    function addParameterField() {
-        setEditParameters([...editParameters, ["", ""]]);
-    }
-
-    function removeParameterField(index: number) {
-        setEditParameters(editParameters.filter((_, i) => i !== index));
     }
 
     // Save job handler
@@ -122,19 +97,14 @@ export default function AdminPage() {
         }
 
         try {
-            // Reconstruct parameters
-            const paramObj: Record<string, string> = {};
-            for (const [k, v] of editParameters) {
-                if (k.trim()) {
-                    paramObj[k.trim()] = v;
-                }
-            }
+            // Parse parameters from raw OBEY form text
+            const parsed = parseObeyText(editObeyForm);
 
             const updatedJob: Job = {
                 job_name: editJobName.trim().toUpperCase(),
                 job_number: Number(editJobNumber),
                 monitor: editMonitor.trim().toUpperCase(),
-                parameters: paramObj,
+                parameters: parsed.parameters,
                 obey_form: editObeyForm,
             };
 
@@ -525,63 +495,19 @@ export default function AdminPage() {
                                 </div>
                             </Card>
 
-                            {/* Parameters & OBEY Split Layout */}
-                            <div className="grid grid-cols-2 gap-8">
-                                {/* Parameters Form */}
-                                <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl space-y-6">
-                                    <div className="flex items-center justify-between">
-                                        <h2 className="text-xl font-bold text-white">Paramètres (clonage)</h2>
-                                        <Button
-                                            onClick={addParameterField}
-                                            variant="secondary"
-                                            className="rounded-xl flex items-center gap-1 px-3 py-1.5 text-xs font-semibold"
-                                        >
-                                            <Plus className="h-3 w-3" />
-                                            Ajouter
-                                        </Button>
-                                    </div>
+                            {/* OBEY Form Editor - Full Width */}
+                            <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl space-y-4">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <FileText className="h-5 w-5 text-violet-400" />
+                                    <h2 className="text-xl font-bold text-white">Édition de l&apos;OBEY brut</h2>
+                                </div>
 
-                                    <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2">
-                                        {editParameters.map(([key, value], index) => (
-                                            <div key={index} className="flex gap-3 items-center">
-                                                <Input
-                                                    value={key}
-                                                    onChange={(e) => updateParameterKey(index, e.target.value)}
-                                                    placeholder="SET PARAM"
-                                                    className="w-2/5 border-zinc-800 bg-zinc-950/50 h-10 font-mono text-xs"
-                                                />
-                                                <Input
-                                                    value={value}
-                                                    onChange={(e) => updateParameterValue(index, e.target.value)}
-                                                    placeholder="valeur"
-                                                    className="flex-1 border-zinc-800 bg-zinc-950/50 h-10 font-mono text-xs"
-                                                />
-                                                <Button
-                                                    onClick={() => removeParameterField(index)}
-                                                    variant="ghost"
-                                                    className="text-zinc-500 hover:text-red-400 p-2 hover:bg-transparent"
-                                                >
-                                                    <X className="h-4 w-4" />
-                                                </Button>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </Card>
-
-                                {/* OBEY Form Editor */}
-                                <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl space-y-4">
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <FileText className="h-5 w-5 text-violet-400" />
-                                        <h2 className="text-xl font-bold text-white">Édition de l&apos;OBEY brut</h2>
-                                    </div>
-
-                                    <Textarea
-                                        value={editObeyForm}
-                                        onChange={(e) => setEditObeyForm(e.target.value)}
-                                        className="min-h-[460px] font-mono text-xs leading-relaxed border-zinc-800 bg-zinc-950/50 text-zinc-300 focus-visible:ring-violet-500"
-                                    />
-                                </Card>
-                            </div>
+                                <Textarea
+                                    value={editObeyForm}
+                                    onChange={(e) => setEditObeyForm(e.target.value)}
+                                    className="min-h-[500px] font-mono text-sm leading-relaxed border-zinc-800 bg-zinc-950/50 text-zinc-300 focus-visible:ring-violet-500"
+                                />
+                            </Card>
                         </div>
                     ) : (
                         <div className="h-full flex items-center justify-center text-zinc-500">
