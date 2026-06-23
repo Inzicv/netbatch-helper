@@ -1,5 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 import {
 
@@ -7,7 +9,9 @@ import {
 
     User,
 
-    Server
+    Server,
+    
+    FileCode
 
 } from "lucide-react";
 
@@ -45,13 +49,20 @@ export default function HeaderCard({
 
             <div className="space-y-6">
 
-                <div>
+                <div className="flex items-center justify-between">
 
                     <h1 className="text-3xl font-bold tracking-tight text-white">
 
                         {jobName}
 
                     </h1>
+
+                    <Button asChild className="rounded-2xl border border-violet-500/20 bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-violet-700 transition-all shadow-lg shadow-violet-500/10">
+                        <Link href={`/generator?model=${jobName}`} className="flex items-center gap-2">
+                            <FileCode className="h-4 w-4" />
+                            Utiliser comme modèle
+                        </Link>
+                    </Button>
 
                 </div>
 

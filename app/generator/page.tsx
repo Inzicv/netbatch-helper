@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import Header from "@/components/header";
 
@@ -11,8 +11,12 @@ import DependencyCard from "@/components/dependency-card";
 import PreviewCard from "@/components/generator/preview-card";
 
 import { loadJobModel } from "@/lib/generator";
+import { buildObey } from "@/lib/build-obey";
+import { Job } from "@/lib/types";
 
 export default function GeneratorPage() {
+
+    const [loadedModel, setLoadedModel] = useState<Job | null>(null);
 
     const [jobName, setJobName] = useState("");
 
@@ -45,6 +49,8 @@ export default function GeneratorPage() {
             return;
 
         }
+
+        setLoadedModel(job);
 
         setJobName(
 
@@ -138,35 +144,41 @@ export default function GeneratorPage() {
 
     }
 
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const params = new URLSearchParams(window.location.search);
+            const modelName = params.get("model");
+            if (modelName) {
+                loadModel(modelName);
+            }
+        }
+    }, []);
+
     const obey = useMemo(() => {
 
-        return `ASSUME JOB
+        if (!loadedModel) {
+            return `ASSUME JOB\n\nRESET\n\nSET VOLUME ${volume}\n\nSET IN ${scriptIn}\n\nSET OUT ${output}\n\nSET EXECUTOR-PROGRAM ${executor}\n\nSET EVERY ${every}\n\nSET HOLD ${hold ? "ON" : "OFF"}\n\nSET STOP-ON-ABEND ${stopOnAbend ? "ON" : "OFF"}\n\n${waitFor.filter(Boolean).length > 0 ? `WAITON ${waitFor.filter(Boolean).join(",")}\n\n` : ""}${after.filter(Boolean).length > 0 ? `AFTER ${after.filter(Boolean).join(",")}\n\n` : ""}==CHANGEUSER ${changeUser}\n\nSUBMIT ${jobName}`;
+        }
 
-RESET
+        const overrides: Record<string, string> = {
+            "SET VOLUME": volume,
+            "SET IN": scriptIn,
+            "SET OUT": output,
+            "SET EXECUTOR-PROGRAM": executor,
+            "SET EVERY": every,
+            "SET HOLD": hold ? "ON" : "OFF",
+            "SET STOP-ON-ABEND": stopOnAbend ? "ON" : "OFF",
+            "==CHANGEUSER": changeUser,
+            "WAITON": waitFor.filter(Boolean).join(","),
+            "AFTER": after.filter(Boolean).join(","),
+            "SUBMIT": jobName,
+        };
 
-SET VOLUME ${volume}
-
-SET IN ${scriptIn}
-
-SET OUT ${output}
-
-SET EXECUTOR-PROGRAM ${executor}
-
-SET EVERY ${every}
-
-SET HOLD ${hold ? "ON" : "OFF"}
-
-SET STOP-ON-ABEND ${stopOnAbend ? "ON" : "OFF"}
-
-${waitFor.length > 0 ? `WAITON ${waitFor.join(",")}` : ""}
-
-${after.length > 0 ? `AFTER ${after.join(",")}` : ""}
-
-==CHANGEUSER ${changeUser}
-
-SUBMIT ${jobName}`;
+        return buildObey(loadedModel, overrides);
 
     }, [
+
+        loadedModel,
 
         jobName,
 

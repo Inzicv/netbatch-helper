@@ -12,7 +12,13 @@ export function buildObey(
     lines.push("RESET");
     lines.push("");
 
+    const processedKeys = new Set<string>(["RESET"]);
+
+    // Process parameters present in the model
     for (const [key, value] of Object.entries(model.parameters)) {
+        if (key === "RESET") {
+            continue;
+        }
 
         let finalValue = value;
 
@@ -22,7 +28,14 @@ export function buildObey(
 
         }
 
+        processedKeys.add(key);
+
         if (finalValue === "") {
+
+            // Skip empty dependencies or changeuser parameters
+            if (key === "WAITON" || key === "AFTER" || key === "==CHANGEUSER") {
+                continue;
+            }
 
             lines.push(key);
 
@@ -36,6 +49,18 @@ export function buildObey(
 
         lines.push("");
 
+    }
+
+    // Process any new overrides that weren't in the model parameters
+    for (const [key, value] of Object.entries(overrides)) {
+        if (processedKeys.has(key) || key === "SUBMIT") {
+            continue;
+        }
+
+        if (value !== "") {
+            lines.push(`${key} ${value}`);
+            lines.push("");
+        }
     }
 
     const submitName = overrides["SUBMIT"] || model.job_name;

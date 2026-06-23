@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
 import { translateEvery } from "@/lib/every";
+import { getNextRun } from "@/lib/next-run";
 
 interface EveryCardProps {
 
@@ -418,6 +419,26 @@ export default function EveryCard({
                                 every
 
                             )
+
+                        }
+
+                    </div>
+
+                </div>
+
+                <div className="rounded-2xl border border-zinc-800 bg-zinc-950/50 p-5">
+
+                    <div className="mb-3 text-xs uppercase tracking-widest text-zinc-500">
+
+                        Prochaine exécution
+
+                    </div>
+
+                    <div className="text-zinc-400">
+
+                        {
+
+                            getNextRun(every)
 
                         }
 

@@ -14,6 +14,7 @@ import ObeyCard from "@/components/obey-card";
 
 import { searchJobs } from "@/lib/search";
 import { translateEvery } from "@/lib/every";
+import { getNextRun } from "@/lib/next-run";
 import { Job } from "@/lib/types";
 
 export default function ExplorerPage() {
@@ -292,7 +293,7 @@ export default function ExplorerPage() {
 
                                         }
 
-                                        nextRun="-"
+                                        nextRun={getNextRun(currentJob.parameters["SET EVERY"] || "")}
 
                                     />
 
