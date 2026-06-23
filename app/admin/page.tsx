@@ -18,7 +18,9 @@ import {
     Plus, 
     Save, 
     FileText, 
-    FolderPlus
+    FolderPlus,
+    PanelLeftClose,
+    PanelLeft
 } from "lucide-react";
 import { Job } from "@/lib/types";
 
@@ -28,6 +30,7 @@ export default function AdminPage() {
     const [search, setSearch] = useState("");
     const [selectedMonitors, setSelectedMonitors] = useState(["$ZBAP", "$ZBAT", "$ZBAD"]);
     const [selectedJobKey, setSelectedJobKey] = useState<string | null>(null);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
 
     // Editing State
     const [editJobName, setEditJobName] = useState("");
@@ -264,56 +267,68 @@ export default function AdminPage() {
         <div className="h-screen overflow-hidden bg-[#09090b] text-white">
             <Header />
 
-            <div className="mx-auto flex h-[calc(100vh-112px)] max-w-[1800px] gap-8 p-8">
+            <div className="flex h-[calc(100vh-96px)] w-full gap-6 p-6 overflow-hidden flex-col lg:flex-row">
                 {/* SIDEBAR SEARCH & LIST */}
-                <div className="flex w-[420px] flex-col gap-6">
-                    <div className="rounded-3xl border border-zinc-800 bg-[#111113] p-6">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-semibold text-white">Administration</h2>
-                            <Button 
-                                onClick={() => setShowAddForm(true)}
-                                className="rounded-2xl bg-violet-600 hover:bg-violet-700 text-white flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-all shadow-md shadow-violet-500/10"
-                            >
-                                <Plus className="h-4 w-4" />
-                                Nouveau
-                            </Button>
+                {sidebarOpen && (
+                    <div className="flex w-full lg:w-[380px] shrink-0 flex-col gap-6 overflow-y-auto pr-1">
+                        <div className="rounded-3xl border border-zinc-800 bg-[#111113] p-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-xl font-semibold text-white">Administration</h2>
+                                <Button 
+                                    onClick={() => setShowAddForm(true)}
+                                    className="rounded-2xl bg-violet-600 hover:bg-violet-700 text-white flex items-center gap-1.5 px-4 py-2 text-sm font-semibold transition-all shadow-md shadow-violet-500/10"
+                                >
+                                    <Plus className="h-4 w-4" />
+                                    Nouveau
+                                </Button>
+                            </div>
+
+                            <SearchBar value={search} onChange={setSearch} />
+                            <div className="mt-4">
+                                <MonitorFilters selectedMonitors={selectedMonitors} toggleMonitor={toggleMonitor} />
+                            </div>
                         </div>
 
-                        <SearchBar value={search} onChange={setSearch} />
-                        <div className="mt-4">
-                            <MonitorFilters selectedMonitors={selectedMonitors} toggleMonitor={toggleMonitor} />
+                        <div className="flex-1 space-y-4 overflow-y-auto pr-2">
+                            {loading ? (
+                                <div className="text-center py-8 text-zinc-500">Chargement...</div>
+                            ) : filteredJobs.length === 0 ? (
+                                <div className="text-center py-8 text-zinc-500">Aucun job trouvé</div>
+                            ) : (
+                                filteredJobs.map((job) => {
+                                    const jobKey = `${job.monitor}_${job.job_name}`;
+                                    return (
+                                        <JobCard
+                                            key={jobKey}
+                                            selected={activeJobKey === jobKey}
+                                            jobName={job.job_name}
+                                            script={job.parameters["SET IN"] || ""}
+                                            user={job.parameters["==CHANGEUSER"] || ""}
+                                            monitor={job.monitor}
+                                            onClick={() => {
+                                                setSelectedJobKey(jobKey);
+                                                setShowAddForm(false);
+                                            }}
+                                        />
+                                    );
+                                })
+                            )}
                         </div>
                     </div>
-
-                    <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-                        {loading ? (
-                            <div className="text-center py-8 text-zinc-500">Chargement...</div>
-                        ) : filteredJobs.length === 0 ? (
-                            <div className="text-center py-8 text-zinc-500">Aucun job trouvé</div>
-                        ) : (
-                            filteredJobs.map((job) => {
-                                const jobKey = `${job.monitor}_${job.job_name}`;
-                                return (
-                                    <JobCard
-                                        key={jobKey}
-                                        selected={activeJobKey === jobKey}
-                                        jobName={job.job_name}
-                                        script={job.parameters["SET IN"] || ""}
-                                        user={job.parameters["==CHANGEUSER"] || ""}
-                                        monitor={job.monitor}
-                                        onClick={() => {
-                                            setSelectedJobKey(jobKey);
-                                            setShowAddForm(false);
-                                        }}
-                                    />
-                                );
-                            })
-                        )}
-                    </div>
-                </div>
+                )}
 
                 {/* MAIN EDITOR PANE */}
                 <div className="flex-1 overflow-y-auto pr-2">
+                    <div className="flex items-center gap-4 mb-4">
+                        <button
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                            className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-900 hover:text-white transition-all"
+                            title={sidebarOpen ? "Masquer la liste" : "Afficher la liste"}
+                        >
+                            {sidebarOpen ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
+                        </button>
+                    </div>
+
                     {showAddForm ? (
                         /* ADD JOB FORM */
                         <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl space-y-6">

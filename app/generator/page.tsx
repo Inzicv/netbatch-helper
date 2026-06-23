@@ -233,7 +233,7 @@ export default function GeneratorPage() {
 
             <Header />
 
-            <div className="mx-auto max-w-7xl space-y-8 p-6">
+            <div className="w-full space-y-8 p-4 md:p-6 lg:p-8">
 
                 <ModelCard
 
@@ -241,7 +241,7 @@ export default function GeneratorPage() {
 
                 />
 
-                <div className="grid grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
 
                     <ConfigurationCard
 

@@ -11,7 +11,9 @@ import {
 
     WandSparkles,
 
-    Settings
+    Settings,
+
+    ClipboardCheck
 
 } from "lucide-react";
 
@@ -23,7 +25,7 @@ export default function Header() {
 
         <header className="sticky top-0 z-50 border-b border-zinc-800/50 bg-[#09090b]/90 backdrop-blur-xl">
 
-            <div className="mx-auto flex h-24 max-w-[1800px] items-center justify-between px-8">
+            <div className="mx-auto flex h-24 w-full items-center justify-between px-6 md:px-8">
 
                 <div className="flex items-center gap-5">
 
@@ -157,6 +159,43 @@ export default function Header() {
                             <span className="font-semibold">
 
                                 Database
+
+                            </span>
+
+                        </div>
+
+                    </Link>
+
+                    <Link
+
+                        href="/audit"
+
+                        className={`
+                            flex items-center gap-3 rounded-2xl px-6 py-3 transition-all duration-300
+                            ${
+                                pathname === "/audit"
+
+                                    ? "bg-violet-600 text-white shadow-[0_0_25px_rgba(124,58,237,.4)]"
+
+                                    : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                            }
+                        `}
+
+                    >
+
+                        <ClipboardCheck className="h-5 w-5" />
+
+                        <div className="flex flex-col leading-none">
+
+                            <span className="text-xs">
+
+                                Audit &
+
+                            </span>
+
+                            <span className="font-semibold">
+
+                                Recherche
 
                             </span>
 

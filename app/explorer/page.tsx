@@ -16,12 +16,15 @@ import { translateEvery } from "@/lib/every";
 import { getNextRun } from "@/lib/next-run";
 import { Job } from "@/lib/types";
 import { useDatabase } from "@/components/database-context";
+import { PanelLeftClose, PanelLeft } from "lucide-react";
 
 export default function ExplorerPage() {
 
     const { searchJobs, loading } = useDatabase();
 
     const [search, setSearch] = useState("");
+
+    const [sidebarOpen, setSidebarOpen] = useState(true);
 
     const [selectedMonitors, setSelectedMonitors] = useState([
 
@@ -144,87 +147,101 @@ export default function ExplorerPage() {
 
             <Header />
 
-            <div className="mx-auto flex h-[calc(100vh-112px)] max-w-[1800px] gap-8 p-8">
+            <div className="flex h-[calc(100vh-96px)] w-full gap-6 p-6 overflow-hidden flex-col lg:flex-row">
 
-                <div className="flex w-[400px] flex-col gap-6">
+                {sidebarOpen && (
 
-                    <div className="rounded-3xl border border-zinc-800 bg-[#111113] p-6">
+                    <div className="flex w-full lg:w-[380px] shrink-0 flex-col gap-6 overflow-y-auto pr-1">
 
-                        <SearchBar
+                        <div className="rounded-3xl border border-zinc-800 bg-[#111113] p-6">
 
-                            value={search}
+                            <SearchBar
 
-                            onChange={setSearch}
+                                value={search}
 
-                        />
-
-                        <div className="mt-6">
-
-                            <MonitorFilters
-
-                                selectedMonitors={selectedMonitors}
-
-                                toggleMonitor={toggleMonitor}
+                                onChange={setSearch}
 
                             />
+
+                            <div className="mt-6">
+
+                                <MonitorFilters
+
+                                    selectedMonitors={selectedMonitors}
+
+                                    toggleMonitor={toggleMonitor}
+
+                                />
+
+                            </div>
+
+                        </div>
+
+                        <div className="flex-1 space-y-4 overflow-y-auto pr-2">
+
+                            {
+
+                                results.map(
+
+                                    (job) => (
+
+                                        <JobCard
+
+                                            key={`${job.monitor}_${job.job_name}`}
+
+                                            selected={
+
+                                                currentJob?.job_name === job.job_name
+
+                                            }
+
+                                            jobName={job.job_name}
+
+                                            script={
+
+                                                job.parameters["SET IN"] || ""
+
+                                            }
+
+                                            user={
+
+                                                job.parameters["==CHANGEUSER"] || ""
+
+                                            }
+
+                                            monitor={job.monitor}
+
+                                            onClick={() =>
+
+                                                setSelectedJob(job)
+
+                                            }
+
+                                        />
+
+                                    )
+
+                                )
+
+                            }
 
                         </div>
 
                     </div>
 
-                    <div className="flex-1 space-y-4 overflow-y-auto pr-2">
-
-                        {
-
-                            results.map(
-
-                                (job) => (
-
-                                    <JobCard
-
-                                        key={`${job.monitor}_${job.job_name}`}
-
-                                        selected={
-
-                                            currentJob?.job_name === job.job_name
-
-                                        }
-
-                                        jobName={job.job_name}
-
-                                        script={
-
-                                            job.parameters["SET IN"] || ""
-
-                                        }
-
-                                        user={
-
-                                            job.parameters["==CHANGEUSER"] || ""
-
-                                        }
-
-                                        monitor={job.monitor}
-
-                                        onClick={() =>
-
-                                            setSelectedJob(job)
-
-                                        }
-
-                                    />
-
-                                )
-
-                            )
-
-                        }
-
-                    </div>
-
-                </div>
+                )}
 
                 <div className="flex-1 overflow-y-auto pr-2">
+
+                    <div className="flex items-center gap-4 mb-4">
+                        <button
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                            className="rounded-lg p-2 text-zinc-400 hover:bg-zinc-900 hover:text-white transition-all"
+                            title={sidebarOpen ? "Masquer la liste" : "Afficher la liste"}
+                        >
+                            {sidebarOpen ? <PanelLeftClose className="h-5 w-5" /> : <PanelLeft className="h-5 w-5" />}
+                        </button>
+                    </div>
 
                     {
 
