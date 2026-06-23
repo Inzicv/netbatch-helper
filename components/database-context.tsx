@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState, useMemo } from "react";
 import { Job, JobsDatabase } from "@/lib/types";
+import { useAuth } from "./auth-context";
 
 interface DatabaseContextType {
     jobs: JobsDatabase;
@@ -16,11 +17,12 @@ interface DatabaseContextType {
 const DatabaseContext = createContext<DatabaseContextType | undefined>(undefined);
 
 export function DatabaseProvider({ children }: { children: React.ReactNode }) {
+    const { isAuthenticated } = useAuth();
     const [jobs, setJobs] = useState<JobsDatabase>({});
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    // Load database on mount
+    // Load database when user becomes authenticated
     const fetchJobs = async () => {
         try {
             setLoading(true);
@@ -40,10 +42,14 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
     };
 
     useEffect(() => {
-        setTimeout(() => {
+        if (isAuthenticated) {
             fetchJobs();
-        }, 0);
-    }, []);
+        } else {
+            setJobs({});
+            setError(null);
+            setLoading(false);
+        }
+    }, [isAuthenticated]);
 
     const allJobs = useMemo(() => Object.values(jobs), [jobs]);
 
