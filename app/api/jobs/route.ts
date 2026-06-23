@@ -25,7 +25,7 @@ function rebuildIndexes(jobs: JobsDatabase) {
 
         // Number index
         if (job.job_number !== null && job.job_number !== undefined) {
-            const numKey = `${job.monitor}_${job.job_number}`;
+            const numKey = `${job.system}.${job.monitor}.${job.job_number}`;
             numberIndex[numKey] = jobKey;
         }
     }
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
         const fileContent = await fs.readFile(jobsPath, "utf-8");
         const jobs = JSON.parse(fileContent) as JobsDatabase;
 
-        const newJobKey = `${job.monitor}_${job.job_name}`;
+        const newJobKey = `${job.system}.${job.monitor}.${job.job_name}`;
 
         // If job key changed, delete the old key
         if (oldJobKey && oldJobKey !== newJobKey) {

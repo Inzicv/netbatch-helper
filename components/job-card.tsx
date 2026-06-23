@@ -14,6 +14,8 @@ interface JobCardProps {
 
     monitor: string;
 
+    system: string;
+
     onClick?: () => void;
 
 }
@@ -29,6 +31,8 @@ export default function JobCard({
     user,
 
     monitor,
+
+    system,
 
     onClick
 
@@ -84,7 +88,7 @@ export default function JobCard({
 
                     <div className="rounded-full border border-violet-500/20 bg-violet-500/10 px-3 py-1 text-xs font-medium text-violet-300">
 
-                        {monitor}
+                        {system} • {monitor}
 
                     </div>
 

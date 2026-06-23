@@ -4,6 +4,8 @@ export interface JobParameters {
 
 export interface Job {
 
+    system: string;
+
     job_name: string;
 
     job_number: number | null;

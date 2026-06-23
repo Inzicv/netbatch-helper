@@ -42,23 +42,9 @@ export default function GeneratorPage() {
 
     const [after, setAfter] = useState<string[]>([]);
 
-    const loadModel = useCallback((query: string) => {
+    const [matchingJobs, setMatchingJobs] = useState<Job[]>([]);
 
-        if (!query) return;
-        const upperQuery = query.toUpperCase();
-        let job = Object.values(jobs).find(j => j.job_name.toUpperCase() === upperQuery);
-        if (!job) {
-            const results = searchJobs(query);
-            if (results.length > 0) {
-                job = results[0];
-            }
-        }
-
-        if (!job) {
-
-            return;
-
-        }
+    const loadSpecificJob = useCallback((job: Job) => {
 
         setLoadedModel(job);
 
@@ -152,15 +138,65 @@ export default function GeneratorPage() {
 
         );
 
-    }, [jobs, searchJobs]);
+        setMatchingJobs([]);
+
+    }, []);
+
+    const loadModel = useCallback((system?: string | null, monitor?: string | null, query?: string | null) => {
+
+        if (!query) return;
+
+        const upperQuery = query.toUpperCase();
+
+        // If system and monitor are both provided, search exact match
+        if (system && monitor) {
+            const exactKey = `${system}.${monitor}.${upperQuery}`;
+            const job = jobs[exactKey];
+            if (job) {
+                loadSpecificJob(job);
+                return;
+            }
+        }
+
+        // Search by exact name
+        const results = searchJobs(query).filter(j => j.job_name.toUpperCase() === upperQuery);
+
+        if (results.length === 1) {
+
+            loadSpecificJob(results[0]);
+
+        } else if (results.length > 1) {
+
+            setMatchingJobs(results);
+
+        } else {
+
+            // General query fallback (broad searchJobs matching)
+            const broad = searchJobs(query);
+
+            if (broad.length === 1) {
+
+                loadSpecificJob(broad[0]);
+
+            } else if (broad.length > 1) {
+
+                setMatchingJobs(broad);
+
+            }
+
+        }
+
+    }, [jobs, searchJobs, loadSpecificJob]);
 
     useEffect(() => {
         if (typeof window !== "undefined") {
             const params = new URLSearchParams(window.location.search);
             const modelName = params.get("model");
+            const system = params.get("system");
+            const monitor = params.get("monitor");
             if (modelName) {
                 setTimeout(() => {
-                    loadModel(modelName);
+                    loadModel(system, monitor, modelName);
                 }, 0);
             }
         }
@@ -234,6 +270,32 @@ export default function GeneratorPage() {
             <Header />
 
             <div className="w-full space-y-8 p-4 md:p-6 lg:p-8">
+
+                {matchingJobs.length > 1 && (
+                    <div className="rounded-3xl border border-amber-500/35 bg-amber-500/5 p-6 backdrop-blur-xl space-y-4">
+                        <div className="flex items-center gap-3">
+                            <span className="h-2.5 w-2.5 rounded-full bg-amber-500 animate-ping" />
+                            <h3 className="font-bold text-lg text-amber-200">
+                                Plusieurs modèles correspondent à votre recherche. Veuillez choisir :
+                            </h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {matchingJobs.map((job) => (
+                                <button
+                                    key={`${job.system}.${job.monitor}.${job.job_name}`}
+                                    onClick={() => loadSpecificJob(job)}
+                                    className="flex flex-col text-left p-4 rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:border-violet-500 hover:bg-zinc-900/90 transition-all cursor-pointer"
+                                >
+                                    <span className="text-xs text-violet-400 font-bold uppercase">{job.system} • {job.monitor}</span>
+                                    <span className="font-bold text-white text-lg mt-1">{job.job_name}</span>
+                                    <span className="text-xs text-zinc-400 mt-2 line-clamp-1">
+                                        {job.parameters["SET IN"] || "Aucun script"}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                )}
 
                 <ModelCard
 

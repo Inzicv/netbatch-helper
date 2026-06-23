@@ -54,12 +54,12 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
             return allJobs;
         }
 
-        // Search by Job Number
+        // Search by Job Number (returns all matching across systems)
         if (/^\d+$/.test(search)) {
             const num = parseInt(search, 10);
-            const found = allJobs.find(job => job.job_number === num);
-            if (found) {
-                return [found];
+            const found = allJobs.filter(job => job.job_number === num);
+            if (found.length > 0) {
+                return found;
             }
         }
 
@@ -71,6 +71,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
 
         // Full text search
         return allJobs.filter((job) => {
+            const system = (job.system || "").toUpperCase();
             const description = (job.parameters["SET DESCRIPTION"] || "").toUpperCase();
             const scriptIn = (job.parameters["SET IN"] || "").toUpperCase();
             const output = (job.parameters["SET OUT"] || "").toUpperCase();
@@ -80,6 +81,7 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
 
             return (
                 job.job_name.toUpperCase().includes(search)
+                || system.includes(search)
                 || description.includes(search)
                 || scriptIn.includes(search)
                 || output.includes(search)

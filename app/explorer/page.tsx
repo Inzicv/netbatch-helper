@@ -36,6 +36,18 @@ export default function ExplorerPage() {
 
     ]);
 
+    const [selectedSystems, setSelectedSystems] = useState([
+
+        "ATLAS",
+
+        "PADME",
+
+        "ISIS",
+
+        "LEIA"
+
+    ]);
+
     const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
     function toggleMonitor(monitor: string) {
@@ -78,11 +90,9 @@ export default function ExplorerPage() {
 
             .filter(
 
-                job => selectedMonitors.includes(
+                job => selectedMonitors.includes(job.monitor) &&
 
-                    job.monitor
-
-                )
+                       selectedSystems.includes(job.system)
 
             );
 
@@ -93,6 +103,8 @@ export default function ExplorerPage() {
             search,
 
             selectedMonitors,
+
+            selectedSystems,
 
             searchJobs
 
@@ -175,6 +187,34 @@ export default function ExplorerPage() {
 
                             </div>
 
+                            <div className="mt-6 border-t border-zinc-800 pt-6">
+                                <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block mb-3">Système</span>
+                                <div className="grid grid-cols-2 gap-2">
+                                    {["ATLAS", "PADME", "ISIS", "LEIA"].map((sys) => {
+                                        const selected = selectedSystems.includes(sys);
+                                        return (
+                                            <button
+                                                key={sys}
+                                                onClick={() => {
+                                                    if (selectedSystems.includes(sys)) {
+                                                        setSelectedSystems(selectedSystems.filter(s => s !== sys));
+                                                    } else {
+                                                        setSelectedSystems([...selectedSystems, sys]);
+                                                    }
+                                                }}
+                                                className={`rounded-xl py-2 px-3 text-xs font-semibold border transition-all ${
+                                                    selected
+                                                        ? "bg-violet-600/10 border-violet-500/50 text-violet-300"
+                                                        : "bg-[#161619] border-zinc-800 text-zinc-500 hover:text-zinc-300"
+                                                }`}
+                                            >
+                                                {sys}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+
                         </div>
 
                         <div className="flex-1 space-y-4 overflow-y-auto pr-2">
@@ -187,11 +227,13 @@ export default function ExplorerPage() {
 
                                         <JobCard
 
-                                            key={`${job.monitor}_${job.job_name}`}
+                                            key={`${job.system}.${job.monitor}.${job.job_name}`}
 
                                             selected={
 
-                                                currentJob?.job_name === job.job_name
+                                                currentJob?.job_name === job.job_name &&
+                                                currentJob?.monitor === job.monitor &&
+                                                currentJob?.system === job.system
 
                                             }
 
@@ -210,6 +252,8 @@ export default function ExplorerPage() {
                                             }
 
                                             monitor={job.monitor}
+
+                                            system={job.system}
 
                                             onClick={() =>
 
@@ -254,6 +298,8 @@ export default function ExplorerPage() {
                                     jobName={currentJob.job_name}
 
                                     monitor={currentJob.monitor}
+
+                                    system={currentJob.system}
 
                                     jobNumber={currentJob.job_number || 0}
 

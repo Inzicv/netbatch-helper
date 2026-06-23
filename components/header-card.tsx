@@ -21,6 +21,8 @@ interface HeaderCardProps {
 
     monitor: string;
 
+    system: string;
+
     jobNumber: number;
 
     user: string;
@@ -35,6 +37,8 @@ export default function HeaderCard({
 
     monitor,
 
+    system,
+
     jobNumber,
 
     user,
@@ -45,7 +49,7 @@ export default function HeaderCard({
 
     return (
 
-        <Card className="rounded-3xl border border-zinc-800/70 bg-zinc-900/70 p-8 backdrop-blur-xl">
+        <Card className="rounded-3xl border border-zinc-800 bg-[#111113] p-8">
 
             <div className="space-y-6">
 
@@ -58,7 +62,7 @@ export default function HeaderCard({
                     </h1>
 
                     <Button asChild className="rounded-2xl border border-violet-500/20 bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-violet-700 transition-all shadow-lg shadow-violet-500/10">
-                        <Link href={`/generator?model=${jobName}`} className="flex items-center gap-2">
+                        <Link href={`/generator?system=${system}&monitor=${monitor}&model=${jobName}`} className="flex items-center gap-2">
                             <FileCode className="h-4 w-4" />
                             Utiliser comme modèle
                         </Link>
@@ -72,7 +76,7 @@ export default function HeaderCard({
 
                         <Server className="h-3 w-3" />
 
-                        {monitor}
+                        {system} • {monitor}
 
                     </Badge>
 

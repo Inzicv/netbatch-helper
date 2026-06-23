@@ -1,997 +1,997 @@
 {
-    "ARSSLRCC": [
-        "$ZBAT_ARSSLRCC"
-    ],
-    "COMPATLAS": [
-        "$ZBAT_COMPATLAS"
-    ],
-    "CTLDUMP": [
-        "$ZBAT_CTLDUMP"
-    ],
-    "CTLMANOM": [
-        "$ZBAT_CTLMANOM"
-    ],
-    "CTRLCNF": [
-        "$ZBAT_CTRLCNF"
-    ],
-    "CTRSRVPS": [
-        "$ZBAT_CTRSRVPS"
-    ],
-    "DCOMTOT": [
-        "$ZBAT_DCOMTOT"
-    ],
-    "DEBINV": [
-        "$ZBAP_DEBINV"
-    ],
-    "DPSRVPS": [
-        "$ZBAT_DPSRVPS"
-    ],
-    "DSDISQUE": [
-        "$ZBAT_DSDISQUE"
-    ],
-    "EBX045E": [
-        "$ZBAT_EBX045E"
-    ],
-    "EMOAUMCND": [
-        "$ZBAT_EMOAUMCND"
-    ],
-    "EMSPUDTA": [
-        "$ZBAT_EMSPUDTA"
-    ],
-    "EPSINFBE": [
-        "$ZBAT_EPSINFBE"
-    ],
-    "EPUFILESMFT": [
-        "$ZBAT_EPUFILESMFT"
-    ],
-    "EPUGRMFT": [
-        "$ZBAT_EPUGRMFT"
-    ],
-    "EPULOGMFT": [
-        "$ZBAT_EPULOGMFT"
-    ],
-    "EPURMC01": [
-        "$ZBAT_EPURMC01"
-    ],
-    "EPURPGMA": [
-        "$ZBAT_EPURPGMA"
-    ],
-    "EPURPRNT": [
-        "$ZBAT_EPURPRNT"
-    ],
-    "EPURXMFA": [
-        "$ZBAT_EPURXMFA"
-    ],
-    "EPURXMFT": [
-        "$ZBAT_EPURXMFT"
-    ],
-    "EPURZZSA": [
-        "$ZBAT_EPURZZSA"
-    ],
-    "EPUZZPRD": [
-        "$ZBAT_EPUZZPRD"
-    ],
-    "FINERROR": [
-        "$ZBAT_FINERROR"
-    ],
-    "FININV": [
-        "$ZBAP_FININV"
-    ],
-    "MAILGPAO": [
-        "$ZBAT_MAILGPAO"
-    ],
-    "MINUIT": [
-        "$ZBAT_MINUIT"
-    ],
-    "NAMEGOTS": [
-        "$ZBAT_NAMEGOTS"
-    ],
-    "OADNET": [
-        "$ZBAP_OADNET"
-    ],
-    "OADPUR": [
-        "$ZBAP_OADPUR"
-    ],
-    "OAGA03": [
-        "$ZBAP_OAGA03"
-    ],
-    "OAGP271": [
-        "$ZBAP_OAGP271"
-    ],
-    "OAGT80": [
-        "$ZBAP_OAGT80"
-    ],
-    "OAPAE0": [
-        "$ZBAP_OAPAE0"
-    ],
-    "OAPCH1": [
-        "$ZBAP_OAPCH1"
-    ],
-    "OAPD01X": [
-        "$ZBAP_OAPD01X"
-    ],
-    "OAPDEC04": [
-        "$ZBAP_OAPDEC04"
-    ],
-    "OAPDEC05": [
-        "$ZBAP_OAPDEC05"
-    ],
-    "OAPDEC10": [
-        "$ZBAP_OAPDEC10"
-    ],
-    "OAPDEC1B": [
-        "$ZBAP_OAPDEC1B"
-    ],
-    "OAPDECB": [
-        "$ZBAP_OAPDECB",
-        "$ZBAD_OAPDECB"
-    ],
-    "OAPDECP": [
-        "$ZBAP_OAPDECP",
-        "$ZBAD_OAPDECP"
-    ],
-    "OAPRV95X": [
-        "$ZBAP_OAPRV95X"
-    ],
-    "OAPTCE2": [
-        "$ZBAP_OAPTCE2"
-    ],
-    "OAPTE11": [
-        "$ZBAP_OAPTE11"
-    ],
-    "OAPU01": [
-        "$ZBAP_OAPU01"
-    ],
-    "OAPUC1": [
-        "$ZBAP_OAPUC1"
-    ],
     "OAPUHPRO": [
-        "$ZBAP_OAPUHPRO"
-    ],
-    "OAPUPAE": [
-        "$ZBAP_OAPUPAE"
-    ],
-    "OAPURECY": [
-        "$ZBAP_OAPURECY"
-    ],
-    "OAPWPUR": [
-        "$ZBAP_OAPWPUR"
-    ],
-    "OAQP03": [
-        "$ZBAP_OAQP03"
-    ],
-    "OAQP06": [
-        "$ZBAP_OAQP06"
-    ],
-    "OAQT01": [
-        "$ZBAP_OAQT01"
-    ],
-    "OAQT010": [
-        "$ZBAP_OAQT010"
-    ],
-    "OAQT02": [
-        "$ZBAP_OAQT02"
-    ],
-    "OARECYC1": [
-        "$ZBAP_OARECYC1"
-    ],
-    "OARECYCX": [
-        "$ZBAP_OARECYCX"
-    ],
-    "OARH24": [
-        "$ZBAP_OARH24"
-    ],
-    "OARMVT03": [
-        "$ZBAP_OARMVT03"
-    ],
-    "OAROBOTRJ": [
-        "$ZBAP_OAROBOTRJ"
-    ],
-    "OAROBOTRP": [
-        "$ZBAP_OAROBOTRP"
-    ],
-    "OARPU02": [
-        "$ZBAP_OARPU02"
-    ],
-    "OARUCDE": [
-        "$ZBAP_OARUCDE"
-    ],
-    "OARUPOS": [
-        "$ZBAP_OARUPOS"
-    ],
-    "OASTATMQ": [
-        "$ZBAP_OASTATMQ"
-    ],
-    "OASUHMP": [
-        "$ZBAP_OASUHMP"
-    ],
-    "OATRUM1": [
-        "$ZBAP_OATRUM1"
-    ],
-    "OAUMCND": [
-        "$ZBAD_OAUMCND"
-    ],
-    "OAUMMSG": [
-        "$ZBAP_OAUMMSG"
-    ],
-    "OBGCOMP": [
-        "$ZBAP_OBGCOMP"
-    ],
-    "OBGDEPVA": [
-        "$ZBAP_OBGDEPVA"
-    ],
-    "OBSLB40": [
-        "$ZBAP_OBSLB40"
-    ],
-    "OCONCILR": [
-        "$ZBAD_OCONCILR"
-    ],
-    "OEPURRAD": [
-        "$ZBAT_OEPURRAD"
-    ],
-    "OEXPMAIL": [
-        "$ZBAT_OEXPMAIL"
-    ],
-    "OGARR10": [
-        "$ZBAP_OGARR10"
-    ],
-    "OGBAUPUR": [
-        "$ZBAP_OGBAUPUR"
-    ],
-    "OGBAUREC": [
-        "$ZBAP_OGBAUREC"
-    ],
-    "OGBGGA01": [
-        "$ZBAP_OGBGGA01"
-    ],
-    "OGBGWJ10": [
-        "$ZBAP_OGBGWJ10"
-    ],
-    "OGCFL10": [
-        "$ZBAP_OGCFL10"
-    ],
-    "OGFIFIL2": [
-        "$ZBAP_OGFIFIL2"
-    ],
-    "OGGT80": [
-        "$ZBAP_OGGT80"
-    ],
-    "OGINIZO": [
-        "$ZBAP_OGINIZO"
+        "ATLAS.$ZBAP.OAPUHPRO"
     ],
     "OGLPPUR": [
-        "$ZBAP_OGLPPUR"
-    ],
-    "OGMAJQUA": [
-        "$ZBAP_OGMAJQUA"
-    ],
-    "OGMP23": [
-        "$ZBAP_OGMP23"
-    ],
-    "OGPLANIF": [
-        "$ZBAP_OGPLANIF"
-    ],
-    "OGPMVT03": [
-        "$ZBAP_OGPMVT03"
-    ],
-    "OGPRTE": [
-        "$ZBAP_OGPRTE"
+        "ATLAS.$ZBAP.OGLPPUR"
     ],
     "OGPUPALV": [
-        "$ZBAP_OGPUPALV"
+        "ATLAS.$ZBAP.OGPUPALV"
     ],
-    "OGPURAL": [
-        "$ZBAP_OGPURAL"
+    "OADNET": [
+        "ATLAS.$ZBAP.OADNET"
     ],
-    "OGPURECH": [
-        "$ZBAP_OGPURECH"
+    "OAGA03": [
+        "ATLAS.$ZBAP.OAGA03"
     ],
-    "OGPURHGC": [
-        "$ZBAP_OGPURHGC"
+    "OAGP271": [
+        "ATLAS.$ZBAP.OAGP271"
     ],
-    "OGPURST": [
-        "$ZBAP_OGPURST"
+    "OAPCH1": [
+        "ATLAS.$ZBAP.OAPCH1"
     ],
-    "OGPUTRA": [
-        "$ZBAP_OGPUTRA"
+    "OAPTCE2": [
+        "ATLAS.$ZBAP.OAPTCE2"
     ],
-    "OGRP23": [
-        "$ZBAP_OGRP23"
+    "OAPTE11": [
+        "ATLAS.$ZBAP.OAPTE11"
     ],
-    "OGRPC01": [
-        "$ZBAP_OGRPC01"
+    "OAPU01": [
+        "ATLAS.$ZBAP.OAPU01"
     ],
-    "OGSTTRA2": [
-        "$ZBAP_OGSTTRA2"
+    "OAPUC1": [
+        "ATLAS.$ZBAP.OAPUC1"
     ],
-    "OGSUISTO": [
-        "$ZBAP_OGSUISTO"
+    "OAPURECY": [
+        "ATLAS.$ZBAP.OAPURECY"
     ],
-    "OGTRASUI": [
-        "$ZBAP_OGTRASUI"
+    "OAQT01": [
+        "ATLAS.$ZBAP.OAQT01"
     ],
-    "OIADH9": [
-        "$ZBAP_OIADH9"
+    "OAQT010": [
+        "ATLAS.$ZBAP.OAQT010"
     ],
-    "OIAR01": [
-        "$ZBAP_OIAR01"
+    "OAQT02": [
+        "ATLAS.$ZBAP.OAQT02"
     ],
-    "OIARCH": [
-        "$ZBAP_OIARCH"
+    "OARECYC1": [
+        "ATLAS.$ZBAP.OARECYC1"
     ],
-    "OIBAPU": [
-        "$ZBAP_OIBAPU"
+    "OARH24": [
+        "ATLAS.$ZBAP.OARH24"
     ],
-    "OIBATO": [
-        "$ZBAP_OIBATO"
-    ],
-    "OICLIEXN": [
-        "$ZBAP_OICLIEXN"
-    ],
-    "OIDOSSATT": [
-        "$ZBAP_OIDOSSATT"
-    ],
-    "OIDSEA3": [
-        "$ZBAP_OIDSEA3"
-    ],
-    "OIDSEANA": [
-        "$ZBAP_OIDSEANA"
-    ],
-    "OIDSEPU": [
-        "$ZBAP_OIDSEPU"
-    ],
-    "OIEX52": [
-        "$ZBAP_OIEX52"
-    ],
-    "OIFACT": [
-        "$ZBAP_OIFACT"
-    ],
-    "OIFACT0": [
-        "$ZBAP_OIFACT0"
-    ],
-    "OIITRSU4": [
-        "$ZBAP_OIITRSU4"
-    ],
-    "OIPAG": [
-        "$ZBAP_OIPAG"
-    ],
-    "OIPAGMA": [
-        "$ZBAP_OIPAGMA"
-    ],
-    "OIPILOTH": [
-        "$ZBAP_OIPILOTH"
-    ],
-    "OIPILOTM": [
-        "$ZBAP_OIPILOTM"
-    ],
-    "OIPRUEXP": [
-        "$ZBAP_OIPRUEXP"
-    ],
-    "OIPU01": [
-        "$ZBAP_OIPU01"
-    ],
-    "OIPU06": [
-        "$ZBAP_OIPU06"
-    ],
-    "OIPU07": [
-        "$ZBAP_OIPU07"
-    ],
-    "OIPUBEA": [
-        "$ZBAP_OIPUBEA"
-    ],
-    "OIPUFCE": [
-        "$ZBAP_OIPUFCE"
-    ],
-    "OIPURLDV": [
-        "$ZBAP_OIPURLDV"
-    ],
-    "OITEDQ": [
-        "$ZBAP_OITEDQ"
-    ],
-    "OITRA00": [
-        "$ZBAP_OITRA00"
-    ],
-    "OIUE": [
-        "$ZBAP_OIUE"
-    ],
-    "OLINIMAP": [
-        "$ZBAD_OLINIMAP"
-    ],
-    "OLPUARTA": [
-        "$ZBAP_OLPUARTA"
-    ],
-    "OLSUCTRL": [
-        "$ZBAP_OLSUCTRL"
-    ],
-    "OLSUPCON": [
-        "$ZBAP_OLSUPCON"
-    ],
-    "OLSUPMAT": [
-        "$ZBAP_OLSUPMAT"
-    ],
-    "OLSUPSAT": [
-        "$ZBAP_OLSUPSAT"
-    ],
-    "OLSUPUMG": [
-        "$ZBAP_OLSUPUMG"
-    ],
-    "OM48CD00": [
-        "$ZBAD_OM48CD00"
-    ],
-    "OM48CD00K": [
-        "$ZBAD_OM48CD00K"
-    ],
-    "OM48CD0J": [
-        "$ZBAP_OM48CD0J"
-    ],
-    "OM48CD0N": [
-        "$ZBAP_OM48CD0N"
-    ],
-    "OM48CD0P": [
-        "$ZBAP_OM48CD0P"
+    "OARPU02": [
+        "ATLAS.$ZBAP.OARPU02"
     ],
     "OM48CP11": [
-        "$ZBAP_OM48CP11"
+        "ATLAS.$ZBAP.OM48CP11"
     ],
     "OM48HT11": [
-        "$ZBAP_OM48HT11"
-    ],
-    "OM48PU1": [
-        "$ZBAP_OM48PU1"
-    ],
-    "OM48PU2": [
-        "$ZBAP_OM48PU2"
+        "ATLAS.$ZBAP.OM48HT11"
     ],
     "OMANPRV": [
-        "$ZBAP_OMANPRV"
+        "ATLAS.$ZBAP.OMANPRV"
     ],
     "OMAPPU": [
-        "$ZBAP_OMAPPU"
+        "ATLAS.$ZBAP.OMAPPU"
     ],
     "OMARUM": [
-        "$ZBAP_OMARUM"
-    ],
-    "OMBITLX": [
-        "$ZBAP_OMBITLX"
-    ],
-    "OMBRAGAA": [
-        "$ZBAP_OMBRAGAA"
-    ],
-    "OMCTRUE": [
-        "$ZBAP_OMCTRUE"
-    ],
-    "OMCWAGA": [
-        "$ZBAP_OMCWAGA"
-    ],
-    "OMFAMDS": [
-        "$ZBAP_OMFAMDS"
-    ],
-    "OMFPCARC": [
-        "$ZBAP_OMFPCARC"
-    ],
-    "OMFTC": [
-        "$ZBAP_OMFTC"
-    ],
-    "OMFUMA": [
-        "$ZBAP_OMFUMA"
-    ],
-    "OMIGWT": [
-        "$ZBAP_OMIGWT"
-    ],
-    "OMINVW": [
-        "$ZBAP_OMINVW"
-    ],
-    "OMLANBAT": [
-        "$ZBAP_OMLANBAT"
-    ],
-    "OMPCCG": [
-        "$ZBAP_OMPCCG"
-    ],
-    "OMPMVTB": [
-        "$ZBAP_OMPMVTB"
-    ],
-    "OMPUCA": [
-        "$ZBAP_OMPUCA"
-    ],
-    "OMPUEFR": [
-        "$ZBAP_OMPUEFR"
+        "ATLAS.$ZBAP.OMARUM"
     ],
     "OMPUFEA": [
-        "$ZBAP_OMPUFEA"
+        "ATLAS.$ZBAP.OMPUFEA"
+    ],
+    "OMFTC": [
+        "ATLAS.$ZBAP.OMFTC"
+    ],
+    "OMFUMA": [
+        "ATLAS.$ZBAP.OMFUMA"
+    ],
+    "OMIGWT": [
+        "ATLAS.$ZBAP.OMIGWT"
+    ],
+    "OMINVW": [
+        "ATLAS.$ZBAP.OMINVW"
+    ],
+    "OMPCCG": [
+        "ATLAS.$ZBAP.OMPCCG"
+    ],
+    "OMPMVTB": [
+        "ATLAS.$ZBAP.OMPMVTB"
+    ],
+    "OMPUCA": [
+        "ATLAS.$ZBAP.OMPUCA"
+    ],
+    "OMPUEFR": [
+        "ATLAS.$ZBAP.OMPUEFR"
+    ],
+    "OMBRAGAA": [
+        "ATLAS.$ZBAP.OMBRAGAA"
     ],
     "OMPUMA": [
-        "$ZBAP_OMPUMA"
+        "ATLAS.$ZBAP.OMPUMA"
     ],
     "OMPUMG": [
-        "$ZBAP_OMPUMG"
-    ],
-    "OMPURECY": [
-        "$ZBAP_OMPURECY"
+        "ATLAS.$ZBAP.OMPUMG"
     ],
     "OMPUUECA": [
-        "$ZBAP_OMPUUECA"
-    ],
-    "OMPWBT": [
-        "$ZBAP_OMPWBT"
-    ],
-    "OMRAMDS": [
-        "$ZBAP_OMRAMDS"
-    ],
-    "OMSURGAM": [
-        "$ZBAP_OMSURGAM"
+        "ATLAS.$ZBAP.OMPUUECA"
     ],
     "OMTPCPT": [
-        "$ZBAP_OMTPCPT"
+        "ATLAS.$ZBAP.OMTPCPT"
     ],
-    "ONATSPRG": [
-        "$ZBAP_ONATSPRG"
+    "OMFAMDS": [
+        "ATLAS.$ZBAP.OMFAMDS"
     ],
-    "ONBNNP2": [
-        "$ZBAD_ONBNNP2"
-    ],
-    "ONBNNPD": [
-        "$ZBAD_ONBNNPD"
-    ],
-    "ONBNNPK": [
-        "$ZBAD_ONBNNPK"
-    ],
-    "ONBNNPR": [
-        "$ZBAD_ONBNNPR"
-    ],
-    "ONBNNPU": [
-        "$ZBAD_ONBNNPU"
-    ],
-    "ONBNNPV": [
-        "$ZBAD_ONBNNPV"
-    ],
-    "ONPUMARS": [
-        "$ZBAP_ONPUMARS"
-    ],
-    "ONTST01": [
-        "$ZBAD_ONTST01"
-    ],
-    "ONTST03": [
-        "$ZBAD_ONTST03"
-    ],
-    "ORECONCL": [
-        "$ZBAD_ORECONCL"
-    ],
-    "OREFMARS": [
-        "$ZBAP_OREFMARS"
-    ],
-    "ORELSURV": [
-        "$ZBAT_ORELSURV"
-    ],
-    "OSAD19C": [
-        "$ZBAP_OSAD19C"
-    ],
-    "OSADUC2": [
-        "$ZBAP_OSADUC2"
-    ],
-    "OSALPME2": [
-        "$ZBAP_OSALPME2"
-    ],
-    "OSAR50": [
-        "$ZBAP_OSAR50"
-    ],
-    "OSAV18": [
-        "$ZBAP_OSAV18"
-    ],
-    "OSAV311": [
-        "$ZBAP_OSAV311"
-    ],
-    "OSAVNRES": [
-        "$ZBAP_OSAVNRES"
-    ],
-    "OSBRMIC": [
-        "$ZBAP_OSBRMIC"
-    ],
-    "OSCOUQL2": [
-        "$ZBAP_OSCOUQL2"
-    ],
-    "OSCTLQUA": [
-        "$ZBAP_OSCTLQUA"
-    ],
-    "OSDATESQ": [
-        "$ZBAP_OSDATESQ"
-    ],
-    "OSDESTC2": [
-        "$ZBAP_OSDESTC2"
-    ],
-    "OSEXTFAB": [
-        "$ZBAP_OSEXTFAB"
-    ],
-    "OSGR01X": [
-        "$ZBAP_OSGR01X"
-    ],
-    "OSGR05X": [
-        "$ZBAP_OSGR05X"
-    ],
-    "OSGT51": [
-        "$ZBAP_OSGT51"
-    ],
-    "OSLB20": [
-        "$ZBAP_OSLB20"
-    ],
-    "OSLB25": [
-        "$ZBAP_OSLB25"
-    ],
-    "OSLB28": [
-        "$ZBAP_OSLB28"
-    ],
-    "OSLB33": [
-        "$ZBAP_OSLB33"
-    ],
-    "OSLB34": [
-        "$ZBAP_OSLB34"
-    ],
-    "OSMNUPR1": [
-        "$ZBAP_OSMNUPR1"
-    ],
-    "OSMNUPR2": [
-        "$ZBAP_OSMNUPR2"
-    ],
-    "OSMONPU2": [
-        "$ZBAP_OSMONPU2"
-    ],
-    "OSNR2AGG": [
-        "$ZBAP_OSNR2AGG"
-    ],
-    "OSNR2CC1": [
-        "$ZBAP_OSNR2CC1"
-    ],
-    "OSNR2CC2": [
-        "$ZBAP_OSNR2CC2"
-    ],
-    "OSNR2COK": [
-        "$ZBAP_OSNR2COK"
-    ],
-    "OSNR2CVX": [
-        "$ZBAP_OSNR2CVX"
-    ],
-    "OSNR2DEC": [
-        "$ZBAP_OSNR2DEC"
-    ],
-    "OSNR2HF1": [
-        "$ZBAP_OSNR2HF1"
-    ],
-    "OSNR2HF2": [
-        "$ZBAP_OSNR2HF2"
-    ],
-    "OSNR2LFX": [
-        "$ZBAP_OSNR2LFX"
-    ],
-    "OSNR2RHX": [
-        "$ZBAP_OSNR2RHX"
-    ],
-    "OSNR2TAB": [
-        "$ZBAP_OSNR2TAB"
-    ],
-    "OSNRJAGG": [
-        "$ZBAP_OSNRJAGG"
-    ],
-    "OSNRJCC1": [
-        "$ZBAP_OSNRJCC1"
-    ],
-    "OSNRJCC2": [
-        "$ZBAP_OSNRJCC2"
-    ],
-    "OSNRJCOK": [
-        "$ZBAP_OSNRJCOK"
-    ],
-    "OSNRJCVX": [
-        "$ZBAP_OSNRJCVX"
-    ],
-    "OSNRJDEC": [
-        "$ZBAP_OSNRJDEC"
-    ],
-    "OSNRJHF1": [
-        "$ZBAP_OSNRJHF1"
-    ],
-    "OSNRJHF2": [
-        "$ZBAP_OSNRJHF2"
-    ],
-    "OSNRJLFX": [
-        "$ZBAP_OSNRJLFX"
-    ],
-    "OSNRJRHX": [
-        "$ZBAP_OSNRJRHX"
-    ],
-    "OSNRJTAB": [
-        "$ZBAP_OSNRJTAB"
-    ],
-    "OSNRSFL1": [
-        "$ZBAP_OSNRSFL1"
-    ],
-    "OSNRSFL2": [
-        "$ZBAP_OSNRSFL2"
-    ],
-    "OSNRSFL3": [
-        "$ZBAP_OSNRSFL3"
-    ],
-    "OSNRSFLG": [
-        "$ZBAP_OSNRSFLG"
-    ],
-    "OSPDS03": [
-        "$ZBAP_OSPDS03"
-    ],
-    "OSPMASP": [
-        "$ZBAP_OSPMASP"
-    ],
-    "OSPMS20": [
-        "$ZBAP_OSPMS20"
-    ],
-    "OSPRXMLJ": [
-        "$ZBAP_OSPRXMLJ"
-    ],
-    "OSPRXMLM": [
-        "$ZBAP_OSPRXMLM"
-    ],
-    "OSPRXMLS": [
-        "$ZBAP_OSPRXMLS"
-    ],
-    "OSPSMA": [
-        "$ZBAP_OSPSMA"
-    ],
-    "OSPUCONS": [
-        "$ZBAP_OSPUCONS"
-    ],
-    "OSPURBA": [
-        "$ZBAP_OSPURBA"
-    ],
-    "OSPURBR": [
-        "$ZBAP_OSPURBR"
-    ],
-    "OSPURBV": [
-        "$ZBAP_OSPURBV"
-    ],
-    "OSPURCOU": [
-        "$ZBAP_OSPURCOU"
-    ],
-    "OSPURECY": [
-        "$ZBAP_OSPURECY"
-    ],
-    "OSPURMIS": [
-        "$ZBAP_OSPURMIS"
-    ],
-    "OSPURMOD": [
-        "$ZBAP_OSPURMOD"
-    ],
-    "OSRAAF3": [
-        "$ZBAP_OSRAAF3"
-    ],
-    "OSRAAF7": [
-        "$ZBAP_OSRAAF7"
-    ],
-    "OSRACB1": [
-        "$ZBAP_OSRACB1"
-    ],
-    "OSRACB1K": [
-        "$ZBAD_OSRACB1K"
-    ],
-    "OSRACB1P": [
-        "$ZBAP_OSRACB1P"
-    ],
-    "OSRACR2": [
-        "$ZBAP_OSRACR2"
-    ],
-    "OSRACR2K": [
-        "$ZBAD_OSRACR2K"
-    ],
-    "OSRACR2P": [
-        "$ZBAP_OSRACR2P"
-    ],
-    "OSRACR3": [
-        "$ZBAP_OSRACR3"
-    ],
-    "OSRACR4X": [
-        "$ZBAP_OSRACR4X"
-    ],
-    "OSRAER1": [
-        "$ZBAP_OSRAER1"
-    ],
-    "OSRAMS4": [
-        "$ZBAP_OSRAMS4"
-    ],
-    "OSRAPE1": [
-        "$ZBAP_OSRAPE1"
-    ],
-    "OSRASR2": [
-        "$ZBAP_OSRASR2"
-    ],
-    "OSRCRC1": [
-        "$ZBAP_OSRCRC1"
-    ],
-    "OSRCRQ3M": [
-        "$ZBAP_OSRCRQ3M"
-    ],
-    "OSSCDSBR": [
-        "$ZBAP_OSSCDSBR"
-    ],
-    "OSSTRUPR": [
-        "$ZBAP_OSSTRUPR"
-    ],
-    "OSSUIGIB": [
-        "$ZBAP_OSSUIGIB"
-    ],
-    "OSTP42": [
-        "$ZBAP_OSTP42"
-    ],
-    "OSTPROP": [
-        "$ZBAP_OSTPROP"
-    ],
-    "OSUIAFMA": [
-        "$ZBAP_OSUIAFMA"
-    ],
-    "OSVM085": [
-        "$ZBAD_OSVM085"
-    ],
-    "OSVM085F": [
-        "$ZBAP_OSVM085F"
-    ],
-    "OSVMS02": [
-        "$ZBAP_OSVMS02"
-    ],
-    "PKITPPRD": [
-        "$ZBAT_PKITPPRD"
-    ],
-    "PKSINFBE": [
-        "$ZBAT_PKSINFBE"
-    ],
-    "PRGMLFAX": [
-        "$ZBAT_PRGMLFAX"
-    ],
-    "SAUVMQS": [
-        "$ZBAT_SAUVMQS"
-    ],
-    "SAVECMDP": [
-        "$ZBAD_SAVECMDP"
-    ],
-    "SAVEMFTPROD": [
-        "$ZBAT_SAVEMFTPROD"
-    ],
-    "SAVESPOOL101": [
-        "$ZBAT_SAVESPOOL101"
-    ],
-    "SAVEZBAT": [
-        "$ZBAT_SAVEZBAT"
-    ],
-    "SCNFMFTP": [
-        "$ZBAT_SCNFMFTP"
-    ],
-    "SCNFNET0": [
-        "$ZBAT_SCNFNET0"
-    ],
-    "SCNFPON0": [
-        "$ZBAT_SCNFPON0"
-    ],
-    "SCNFPON2": [
-        "$ZBAT_SCNFPON2"
-    ],
-    "SCNFPON4": [
-        "$ZBAT_SCNFPON4"
-    ],
-    "SCNFPROD": [
-        "$ZBAT_SCNFPROD"
-    ],
-    "SCNFPTK2": [
-        "$ZBAT_SCNFPTK2"
-    ],
-    "SCNFPVI0": [
-        "$ZBAT_SCNFPVI0"
-    ],
-    "SCNFPVI2": [
-        "$ZBAT_SCNFPVI2"
-    ],
-    "SCNFPVI4": [
-        "$ZBAT_SCNFPVI4"
-    ],
-    "SCNFSAF1": [
-        "$ZBAT_SCNFSAF1"
-    ],
-    "SCNFSAF3": [
-        "$ZBAT_SCNFSAF3"
-    ],
-    "SCNFSAF6": [
-        "$ZBAT_SCNFSAF6"
-    ],
-    "SCNFSAF7": [
-        "$ZBAT_SCNFSAF7"
-    ],
-    "SCNFSAF8": [
-        "$ZBAT_SCNFSAF8"
-    ],
-    "SCNFSAFG": [
-        "$ZBAT_SCNFSAFG"
-    ],
-    "SCNFSAFL": [
-        "$ZBAT_SCNFSAFL"
-    ],
-    "SCNFWEBP": [
-        "$ZBAT_SCNFWEBP"
-    ],
-    "SCNFWSP1": [
-        "$ZBAT_SCNFWSP1"
-    ],
-    "SCNFWSP2": [
-        "$ZBAT_SCNFWSP2"
-    ],
-    "SONDECHAMBERY": [
-        "$ZBAT_SONDECHAMBERY"
-    ],
-    "SURVST2": [
-        "$ZBAT_SURVST2"
-    ],
-    "SURVTERM": [
-        "$ZBAT_SURVTERM"
-    ],
-    "SWILOVHS": [
-        "$ZBAT_SWILOVHS"
-    ],
-    "SWILOXXX": [
-        "$ZBAT_SWILOXXX"
-    ],
-    "TCLEANLG": [
-        "$ZBAT_TCLEANLG"
-    ],
-    "TCTRLMQ": [
-        "$ZBAT_TCTRLMQ"
-    ],
-    "TCTRLMQ4": [
-        "$ZBAT_TCTRLMQ4"
-    ],
-    "TEXPRINT": [
-        "$ZBAT_TEXPRINT"
-    ],
-    "TLANCMEP": [
-        "$ZBAD_TLANCMEP"
-    ],
-    "TLANCMER": [
-        "$ZBAD_TLANCMER"
+    "OM48PU2": [
+        "ATLAS.$ZBAP.OM48PU2"
     ],
     "TMCTRGAM": [
-        "$ZBAP_TMCTRGAM"
+        "ATLAS.$ZBAP.TMCTRGAM"
     ],
-    "TN32STAT": [
-        "$ZBAT_TN32STAT"
+    "OMCWAGA": [
+        "ATLAS.$ZBAP.OMCWAGA"
     ],
-    "TNBNNPD": [
-        "$ZBAD_TNBNNPD"
+    "OMPURECY": [
+        "ATLAS.$ZBAP.OMPURECY"
     ],
-    "TNBNNPU": [
-        "$ZBAD_TNBNNPU"
+    "OMPWBT": [
+        "ATLAS.$ZBAP.OMPWBT"
     ],
-    "TPSVPTHI": [
-        "$ZBAD_TPSVPTHI"
+    "OM48PU1": [
+        "ATLAS.$ZBAP.OM48PU1"
     ],
-    "TQMEEA": [
-        "$ZBAP_TQMEEA"
+    "OGMAJQUA": [
+        "ATLAS.$ZBAP.OGMAJQUA"
     ],
-    "TQMEEG": [
-        "$ZBAP_TQMEEG"
+    "OBGCOMP": [
+        "ATLAS.$ZBAP.OBGCOMP"
     ],
-    "TQMEEI": [
-        "$ZBAP_TQMEEI"
+    "OBGDEPVA": [
+        "ATLAS.$ZBAP.OBGDEPVA"
     ],
-    "TQMEEL": [
-        "$ZBAP_TQMEEL"
+    "OGARR10": [
+        "ATLAS.$ZBAP.OGARR10"
+    ],
+    "OGBGGA01": [
+        "ATLAS.$ZBAP.OGBGGA01"
+    ],
+    "OGBGWJ10": [
+        "ATLAS.$ZBAP.OGBGWJ10"
+    ],
+    "OGCFL10": [
+        "ATLAS.$ZBAP.OGCFL10"
+    ],
+    "OGINIZO": [
+        "ATLAS.$ZBAP.OGINIZO"
+    ],
+    "OGMP23": [
+        "ATLAS.$ZBAP.OGMP23"
+    ],
+    "OGPRTE": [
+        "ATLAS.$ZBAP.OGPRTE"
+    ],
+    "OGPURHGC": [
+        "ATLAS.$ZBAP.OGPURHGC"
+    ],
+    "OGPURST": [
+        "ATLAS.$ZBAP.OGPURST"
+    ],
+    "OGRP23": [
+        "ATLAS.$ZBAP.OGRP23"
+    ],
+    "OGRPC01": [
+        "ATLAS.$ZBAP.OGRPC01"
+    ],
+    "OMSURGAM": [
+        "ATLAS.$ZBAP.OMSURGAM"
+    ],
+    "OARUCDE": [
+        "ATLAS.$ZBAP.OARUCDE"
+    ],
+    "OARUPOS": [
+        "ATLAS.$ZBAP.OARUPOS"
+    ],
+    "OIPUFCE": [
+        "ATLAS.$ZBAP.OIPUFCE"
+    ],
+    "OIADH9": [
+        "ATLAS.$ZBAP.OIADH9"
+    ],
+    "OIARCH": [
+        "ATLAS.$ZBAP.OIARCH"
+    ],
+    "OIBAPU": [
+        "ATLAS.$ZBAP.OIBAPU"
+    ],
+    "OIBATO": [
+        "ATLAS.$ZBAP.OIBATO"
+    ],
+    "OICLIEXN": [
+        "ATLAS.$ZBAP.OICLIEXN"
+    ],
+    "OIDSEPU": [
+        "ATLAS.$ZBAP.OIDSEPU"
+    ],
+    "OIEX52": [
+        "ATLAS.$ZBAP.OIEX52"
+    ],
+    "OIFACT": [
+        "ATLAS.$ZBAP.OIFACT"
+    ],
+    "OIITRSU4": [
+        "ATLAS.$ZBAP.OIITRSU4"
+    ],
+    "OIAR01": [
+        "ATLAS.$ZBAP.OIAR01"
+    ],
+    "OIPAG": [
+        "ATLAS.$ZBAP.OIPAG"
+    ],
+    "OIPAGMA": [
+        "ATLAS.$ZBAP.OIPAGMA"
+    ],
+    "OIPILOTH": [
+        "ATLAS.$ZBAP.OIPILOTH"
+    ],
+    "OIPILOTM": [
+        "ATLAS.$ZBAP.OIPILOTM"
+    ],
+    "OIPRUEXP": [
+        "ATLAS.$ZBAP.OIPRUEXP"
+    ],
+    "OIPU01": [
+        "ATLAS.$ZBAP.OIPU01"
+    ],
+    "OIPU07": [
+        "ATLAS.$ZBAP.OIPU07"
+    ],
+    "OIPUBEA": [
+        "ATLAS.$ZBAP.OIPUBEA"
+    ],
+    "OIPURLDV": [
+        "ATLAS.$ZBAP.OIPURLDV"
+    ],
+    "OITEDQ": [
+        "ATLAS.$ZBAP.OITEDQ"
+    ],
+    "OIUE": [
+        "ATLAS.$ZBAP.OIUE"
+    ],
+    "OSPDS03": [
+        "ATLAS.$ZBAP.OSPDS03"
+    ],
+    "OSPMASP": [
+        "ATLAS.$ZBAP.OSPMASP"
+    ],
+    "OSAV18": [
+        "ATLAS.$ZBAP.OSAV18"
+    ],
+    "OSAD19C": [
+        "ATLAS.$ZBAP.OSAD19C"
+    ],
+    "OSADUC2": [
+        "ATLAS.$ZBAP.OSADUC2"
+    ],
+    "OSAR50": [
+        "ATLAS.$ZBAP.OSAR50"
+    ],
+    "OSLB20": [
+        "ATLAS.$ZBAP.OSLB20"
+    ],
+    "OSLB25": [
+        "ATLAS.$ZBAP.OSLB25"
+    ],
+    "OSLB33": [
+        "ATLAS.$ZBAP.OSLB33"
+    ],
+    "OSPMS20": [
+        "ATLAS.$ZBAP.OSPMS20"
+    ],
+    "OSPSMA": [
+        "ATLAS.$ZBAP.OSPSMA"
+    ],
+    "OSPUCONS": [
+        "ATLAS.$ZBAP.OSPUCONS"
+    ],
+    "OSPURBA": [
+        "ATLAS.$ZBAP.OSPURBA"
+    ],
+    "OSPURBR": [
+        "ATLAS.$ZBAP.OSPURBR"
+    ],
+    "OSPURBV": [
+        "ATLAS.$ZBAP.OSPURBV"
+    ],
+    "OSPURCOU": [
+        "ATLAS.$ZBAP.OSPURCOU"
+    ],
+    "OSPURECY": [
+        "ATLAS.$ZBAP.OSPURECY"
+    ],
+    "OSPURMOD": [
+        "ATLAS.$ZBAP.OSPURMOD"
+    ],
+    "OSRAAF3": [
+        "ATLAS.$ZBAP.OSRAAF3"
+    ],
+    "OSRAAF7": [
+        "ATLAS.$ZBAP.OSRAAF7"
+    ],
+    "OSRACR2P": [
+        "ATLAS.$ZBAP.OSRACR2P"
+    ],
+    "OSRACR3": [
+        "ATLAS.$ZBAP.OSRACR3"
+    ],
+    "OSRAER1": [
+        "ATLAS.$ZBAP.OSRAER1"
+    ],
+    "OSRAMS4": [
+        "ATLAS.$ZBAP.OSRAMS4"
+    ],
+    "OSRAPE1": [
+        "ATLAS.$ZBAP.OSRAPE1"
+    ],
+    "OSRACR2": [
+        "ATLAS.$ZBAP.OSRACR2"
+    ],
+    "OSRACB1P": [
+        "ATLAS.$ZBAP.OSRACB1P"
+    ],
+    "OSRACB1": [
+        "ATLAS.$ZBAP.OSRACB1"
+    ],
+    "OSRASR2": [
+        "ATLAS.$ZBAP.OSRASR2"
+    ],
+    "OSRCRQ3M": [
+        "ATLAS.$ZBAP.OSRCRQ3M"
+    ],
+    "OSSCDSBR": [
+        "ATLAS.$ZBAP.OSSCDSBR"
+    ],
+    "OSTP42": [
+        "ATLAS.$ZBAP.OSTP42"
+    ],
+    "OSTPROP": [
+        "ATLAS.$ZBAP.OSTPROP"
+    ],
+    "OSUIAFMA": [
+        "ATLAS.$ZBAP.OSUIAFMA"
+    ],
+    "OASTATMQ": [
+        "ATLAS.$ZBAP.OASTATMQ"
+    ],
+    "OARMVT03": [
+        "ATLAS.$ZBAP.OARMVT03"
+    ],
+    "OGPLANIF": [
+        "ATLAS.$ZBAP.OGPLANIF"
+    ],
+    "OGPMVT03": [
+        "ATLAS.$ZBAP.OGPMVT03"
+    ],
+    "OGSUISTO": [
+        "ATLAS.$ZBAP.OGSUISTO"
+    ],
+    "OIFACT0": [
+        "ATLAS.$ZBAP.OIFACT0"
+    ],
+    "OSDATESQ": [
+        "ATLAS.$ZBAP.OSDATESQ"
+    ],
+    "OSEXTFAB": [
+        "ATLAS.$ZBAP.OSEXTFAB"
+    ],
+    "OSGT51": [
+        "ATLAS.$ZBAP.OSGT51"
+    ],
+    "OAPD01X": [
+        "ATLAS.$ZBAP.OAPD01X"
+    ],
+    "OAPRV95X": [
+        "ATLAS.$ZBAP.OAPRV95X"
+    ],
+    "OARECYCX": [
+        "ATLAS.$ZBAP.OARECYCX"
+    ],
+    "OGTRASUI": [
+        "ATLAS.$ZBAP.OGTRASUI"
+    ],
+    "OSBRMIC": [
+        "ATLAS.$ZBAP.OSBRMIC"
+    ],
+    "OGFIFIL2": [
+        "ATLAS.$ZBAP.OGFIFIL2"
+    ],
+    "OGSTTRA2": [
+        "ATLAS.$ZBAP.OGSTTRA2"
+    ],
+    "OSALPME2": [
+        "ATLAS.$ZBAP.OSALPME2"
+    ],
+    "OSCOUQL2": [
+        "ATLAS.$ZBAP.OSCOUQL2"
+    ],
+    "OSDESTC2": [
+        "ATLAS.$ZBAP.OSDESTC2"
+    ],
+    "OSRACR4X": [
+        "ATLAS.$ZBAP.OSRACR4X"
+    ],
+    "OSVMS02": [
+        "ATLAS.$ZBAP.OSVMS02"
+    ],
+    "OSAV311": [
+        "ATLAS.$ZBAP.OSAV311"
+    ],
+    "ONPUMARS": [
+        "ATLAS.$ZBAP.ONPUMARS"
+    ],
+    "OITRA00": [
+        "ATLAS.$ZBAP.OITRA00"
+    ],
+    "OATRUM1": [
+        "ATLAS.$ZBAP.OATRUM1"
+    ],
+    "OSGR01X": [
+        "ATLAS.$ZBAP.OSGR01X"
+    ],
+    "OSPRXMLJ": [
+        "ATLAS.$ZBAP.OSPRXMLJ"
+    ],
+    "OSPRXMLM": [
+        "ATLAS.$ZBAP.OSPRXMLM"
+    ],
+    "OSPRXMLS": [
+        "ATLAS.$ZBAP.OSPRXMLS"
     ],
     "TQMEEM": [
-        "$ZBAP_TQMEEM"
+        "ATLAS.$ZBAP.TQMEEM"
+    ],
+    "TQMEEG": [
+        "ATLAS.$ZBAP.TQMEEG"
     ],
     "TQMEES": [
-        "$ZBAP_TQMEES"
+        "ATLAS.$ZBAP.TQMEES"
+    ],
+    "TQMEEI": [
+        "ATLAS.$ZBAP.TQMEEI"
+    ],
+    "TQMEEA": [
+        "ATLAS.$ZBAP.TQMEEA"
+    ],
+    "OSMNUPR2": [
+        "ATLAS.$ZBAP.OSMNUPR2"
+    ],
+    "OSMONPU2": [
+        "ATLAS.$ZBAP.OSMONPU2"
+    ],
+    "OSMNUPR1": [
+        "ATLAS.$ZBAP.OSMNUPR1"
+    ],
+    "OSSTRUPR": [
+        "ATLAS.$ZBAP.OSSTRUPR"
+    ],
+    "OMRAMDS": [
+        "ATLAS.$ZBAP.OMRAMDS"
+    ],
+    "OSNRJAGG": [
+        "ATLAS.$ZBAP.OSNRJAGG"
+    ],
+    "OSNRJCC1": [
+        "ATLAS.$ZBAP.OSNRJCC1"
+    ],
+    "OSNRJCC2": [
+        "ATLAS.$ZBAP.OSNRJCC2"
+    ],
+    "OSNRJCOK": [
+        "ATLAS.$ZBAP.OSNRJCOK"
+    ],
+    "OSNRJCVX": [
+        "ATLAS.$ZBAP.OSNRJCVX"
+    ],
+    "OSNRJDEC": [
+        "ATLAS.$ZBAP.OSNRJDEC"
+    ],
+    "OSNRJHF1": [
+        "ATLAS.$ZBAP.OSNRJHF1"
+    ],
+    "OSNRJHF2": [
+        "ATLAS.$ZBAP.OSNRJHF2"
+    ],
+    "OSNRJRHX": [
+        "ATLAS.$ZBAP.OSNRJRHX"
+    ],
+    "OSNRJTAB": [
+        "ATLAS.$ZBAP.OSNRJTAB"
+    ],
+    "OSNR2AGG": [
+        "ATLAS.$ZBAP.OSNR2AGG"
+    ],
+    "OSNR2CC1": [
+        "ATLAS.$ZBAP.OSNR2CC1"
+    ],
+    "OSNR2CC2": [
+        "ATLAS.$ZBAP.OSNR2CC2"
+    ],
+    "OSNR2COK": [
+        "ATLAS.$ZBAP.OSNR2COK"
+    ],
+    "OSNR2CVX": [
+        "ATLAS.$ZBAP.OSNR2CVX"
+    ],
+    "OSNR2DEC": [
+        "ATLAS.$ZBAP.OSNR2DEC"
+    ],
+    "OSNR2HF1": [
+        "ATLAS.$ZBAP.OSNR2HF1"
+    ],
+    "OSNR2HF2": [
+        "ATLAS.$ZBAP.OSNR2HF2"
+    ],
+    "OSNR2RHX": [
+        "ATLAS.$ZBAP.OSNR2RHX"
+    ],
+    "OSNR2TAB": [
+        "ATLAS.$ZBAP.OSNR2TAB"
+    ],
+    "OSNRSFLG": [
+        "ATLAS.$ZBAP.OSNRSFLG"
+    ],
+    "OGPURAL": [
+        "ATLAS.$ZBAP.OGPURAL"
+    ],
+    "OGBAUREC": [
+        "ATLAS.$ZBAP.OGBAUREC"
+    ],
+    "OGBAUPUR": [
+        "ATLAS.$ZBAP.OGBAUPUR"
+    ],
+    "OREFMARS": [
+        "ATLAS.$ZBAP.OREFMARS"
+    ],
+    "OGPURECH": [
+        "ATLAS.$ZBAP.OGPURECH"
+    ],
+    "DEBINV": [
+        "ATLAS.$ZBAP.DEBINV"
+    ],
+    "FININV": [
+        "ATLAS.$ZBAP.FININV"
+    ],
+    "OAPAE0": [
+        "ATLAS.$ZBAP.OAPAE0"
+    ],
+    "TQMEEL": [
+        "ATLAS.$ZBAP.TQMEEL"
+    ],
+    "OLPUARTA": [
+        "ATLAS.$ZBAP.OLPUARTA"
+    ],
+    "OBSLB40": [
+        "ATLAS.$ZBAP.OBSLB40"
+    ],
+    "OGPUTRA": [
+        "ATLAS.$ZBAP.OGPUTRA"
+    ],
+    "OAPUPAE": [
+        "ATLAS.$ZBAP.OAPUPAE"
+    ],
+    "OSAVNRES": [
+        "ATLAS.$ZBAP.OSAVNRES"
+    ],
+    "OMCTRUE": [
+        "ATLAS.$ZBAP.OMCTRUE"
+    ],
+    "OMFPCARC": [
+        "ATLAS.$ZBAP.OMFPCARC"
+    ],
+    "OAPDECB": [
+        "ATLAS.$ZBAP.OAPDECB",
+        "ATLAS.$ZBAD.OAPDECB"
+    ],
+    "OLSUCTRL": [
+        "ATLAS.$ZBAP.OLSUCTRL"
+    ],
+    "OIPU06": [
+        "ATLAS.$ZBAP.OIPU06"
+    ],
+    "ONATSPRG": [
+        "ATLAS.$ZBAP.ONATSPRG"
+    ],
+    "OLSUPCON": [
+        "ATLAS.$ZBAP.OLSUPCON"
+    ],
+    "OLSUPSAT": [
+        "ATLAS.$ZBAP.OLSUPSAT"
+    ],
+    "OLSUPUMG": [
+        "ATLAS.$ZBAP.OLSUPUMG"
+    ],
+    "OAQP06": [
+        "ATLAS.$ZBAP.OAQP06"
+    ],
+    "OAQP03": [
+        "ATLAS.$ZBAP.OAQP03"
+    ],
+    "OASUHMP": [
+        "ATLAS.$ZBAP.OASUHMP"
+    ],
+    "OAPDEC04": [
+        "ATLAS.$ZBAP.OAPDEC04"
+    ],
+    "OAPDEC05": [
+        "ATLAS.$ZBAP.OAPDEC05"
+    ],
+    "OMBITLX": [
+        "ATLAS.$ZBAP.OMBITLX"
+    ],
+    "OSRCRC1": [
+        "ATLAS.$ZBAP.OSRCRC1"
+    ],
+    "OADPUR": [
+        "ATLAS.$ZBAP.OADPUR"
+    ],
+    "OLSUPMAT": [
+        "ATLAS.$ZBAP.OLSUPMAT"
+    ],
+    "OSCTLQUA": [
+        "ATLAS.$ZBAP.OSCTLQUA"
+    ],
+    "OSPURMIS": [
+        "ATLAS.$ZBAP.OSPURMIS"
+    ],
+    "OSGR05X": [
+        "ATLAS.$ZBAP.OSGR05X"
+    ],
+    "OMLANBAT": [
+        "ATLAS.$ZBAP.OMLANBAT"
+    ],
+    "OSSUIGIB": [
+        "ATLAS.$ZBAP.OSSUIGIB"
+    ],
+    "OIDSEANA": [
+        "ATLAS.$ZBAP.OIDSEANA"
+    ],
+    "OAPWPUR": [
+        "ATLAS.$ZBAP.OAPWPUR"
+    ],
+    "OSVM085F": [
+        "ATLAS.$ZBAP.OSVM085F"
+    ],
+    "OIDOSSATT": [
+        "ATLAS.$ZBAP.OIDOSSATT"
+    ],
+    "OSNRJLFX": [
+        "ATLAS.$ZBAP.OSNRJLFX"
+    ],
+    "OSNR2LFX": [
+        "ATLAS.$ZBAP.OSNR2LFX"
+    ],
+    "OSNRSFL3": [
+        "ATLAS.$ZBAP.OSNRSFL3"
+    ],
+    "OSNRSFL2": [
+        "ATLAS.$ZBAP.OSNRSFL2"
+    ],
+    "OSNRSFL1": [
+        "ATLAS.$ZBAP.OSNRSFL1"
+    ],
+    "OM48CD0J": [
+        "ATLAS.$ZBAP.OM48CD0J"
+    ],
+    "OM48CD0N": [
+        "ATLAS.$ZBAP.OM48CD0N"
+    ],
+    "OM48CD0P": [
+        "ATLAS.$ZBAP.OM48CD0P"
+    ],
+    "OAPDECP": [
+        "ATLAS.$ZBAP.OAPDECP",
+        "ATLAS.$ZBAD.OAPDECP"
+    ],
+    "OAROBOTRJ": [
+        "ATLAS.$ZBAP.OAROBOTRJ"
+    ],
+    "OAROBOTRP": [
+        "ATLAS.$ZBAP.OAROBOTRP"
+    ],
+    "OAUMMSG": [
+        "ATLAS.$ZBAP.OAUMMSG"
+    ],
+    "OAGT80": [
+        "ATLAS.$ZBAP.OAGT80"
+    ],
+    "OGGT80": [
+        "ATLAS.$ZBAP.OGGT80"
+    ],
+    "OSLB28": [
+        "ATLAS.$ZBAP.OSLB28"
+    ],
+    "OSLB34": [
+        "ATLAS.$ZBAP.OSLB34"
+    ],
+    "OIDSEA3": [
+        "ATLAS.$ZBAP.OIDSEA3"
+    ],
+    "OAPDEC10": [
+        "ATLAS.$ZBAP.OAPDEC10"
+    ],
+    "OAPDEC1B": [
+        "ATLAS.$ZBAP.OAPDEC1B"
+    ],
+    "EMSPUDTA": [
+        "ATLAS.$ZBAT.EMSPUDTA"
+    ],
+    "EBX045E": [
+        "ATLAS.$ZBAT.EBX045E"
+    ],
+    "PRGMLFAX": [
+        "ATLAS.$ZBAT.PRGMLFAX"
+    ],
+    "PKSINFBE": [
+        "ATLAS.$ZBAT.PKSINFBE"
+    ],
+    "MINUIT": [
+        "ATLAS.$ZBAT.MINUIT"
+    ],
+    "SWILOVHS": [
+        "ATLAS.$ZBAT.SWILOVHS"
+    ],
+    "SONDECHAMBERY": [
+        "ATLAS.$ZBAT.SONDECHAMBERY"
+    ],
+    "TN32STAT": [
+        "ATLAS.$ZBAT.TN32STAT"
+    ],
+    "TEXPRINT": [
+        "ATLAS.$ZBAT.TEXPRINT"
+    ],
+    "TCTRLMQ": [
+        "ATLAS.$ZBAT.TCTRLMQ"
+    ],
+    "FINERROR": [
+        "ATLAS.$ZBAT.FINERROR"
     ],
     "TSRVTMF": [
-        "$ZBAT_TSRVTMF"
+        "ATLAS.$ZBAT.TSRVTMF"
+    ],
+    "EPURPGMA": [
+        "ATLAS.$ZBAT.EPURPGMA"
+    ],
+    "SCNFNET0": [
+        "ATLAS.$ZBAT.SCNFNET0"
+    ],
+    "SCNFPON0": [
+        "ATLAS.$ZBAT.SCNFPON0"
+    ],
+    "SCNFPON2": [
+        "ATLAS.$ZBAT.SCNFPON2"
+    ],
+    "SCNFPON4": [
+        "ATLAS.$ZBAT.SCNFPON4"
+    ],
+    "SCNFPVI0": [
+        "ATLAS.$ZBAT.SCNFPVI0"
+    ],
+    "SCNFPVI2": [
+        "ATLAS.$ZBAT.SCNFPVI2"
+    ],
+    "SCNFPVI4": [
+        "ATLAS.$ZBAT.SCNFPVI4"
+    ],
+    "SCNFSAF1": [
+        "ATLAS.$ZBAT.SCNFSAF1"
+    ],
+    "SCNFSAF3": [
+        "ATLAS.$ZBAT.SCNFSAF3"
+    ],
+    "SCNFSAF6": [
+        "ATLAS.$ZBAT.SCNFSAF6"
+    ],
+    "SCNFSAF7": [
+        "ATLAS.$ZBAT.SCNFSAF7"
+    ],
+    "SCNFSAF8": [
+        "ATLAS.$ZBAT.SCNFSAF8"
+    ],
+    "SCNFSAFG": [
+        "ATLAS.$ZBAT.SCNFSAFG"
+    ],
+    "SCNFWSP1": [
+        "ATLAS.$ZBAT.SCNFWSP1"
+    ],
+    "DSDISQUE": [
+        "ATLAS.$ZBAT.DSDISQUE"
+    ],
+    "EPURXMFA": [
+        "ATLAS.$ZBAT.EPURXMFA"
+    ],
+    "CTLDUMP": [
+        "ATLAS.$ZBAT.CTLDUMP"
+    ],
+    "PKITPPRD": [
+        "ATLAS.$ZBAT.PKITPPRD"
+    ],
+    "CTLMANOM": [
+        "ATLAS.$ZBAT.CTLMANOM"
+    ],
+    "SAVEZBAT": [
+        "ATLAS.$ZBAT.SAVEZBAT"
+    ],
+    "DCOMTOT": [
+        "ATLAS.$ZBAT.DCOMTOT"
+    ],
+    "DPSRVPS": [
+        "ATLAS.$ZBAT.DPSRVPS"
+    ],
+    "EPURZZSA": [
+        "ATLAS.$ZBAT.EPURZZSA"
+    ],
+    "EPUZZPRD": [
+        "ATLAS.$ZBAT.EPUZZPRD"
+    ],
+    "EPURMC01": [
+        "ATLAS.$ZBAT.EPURMC01"
+    ],
+    "EPSINFBE": [
+        "ATLAS.$ZBAT.EPSINFBE"
+    ],
+    "SWILOXXX": [
+        "ATLAS.$ZBAT.SWILOXXX"
+    ],
+    "CTRLCNF": [
+        "ATLAS.$ZBAT.CTRLCNF"
+    ],
+    "SURVTERM": [
+        "ATLAS.$ZBAT.SURVTERM"
+    ],
+    "TCLEANLG": [
+        "ATLAS.$ZBAT.TCLEANLG"
+    ],
+    "SCNFWSP2": [
+        "ATLAS.$ZBAT.SCNFWSP2"
     ],
     "TSTPWSP2": [
-        "$ZBAT_TSTPWSP2"
+        "ATLAS.$ZBAT.TSTPWSP2"
     ],
-    "UXITPWSR": [
-        "$ZBAT_UXITPWSR"
+    "SCNFPTK2": [
+        "ATLAS.$ZBAT.SCNFPTK2"
+    ],
+    "SCNFSAFL": [
+        "ATLAS.$ZBAT.SCNFSAFL"
+    ],
+    "COMPATLAS": [
+        "ATLAS.$ZBAT.COMPATLAS"
     ],
     "UXSAVMFT": [
-        "$ZBAT_UXSAVMFT"
+        "ATLAS.$ZBAT.UXSAVMFT"
+    ],
+    "SAVEMFTPROD": [
+        "ATLAS.$ZBAT.SAVEMFTPROD"
+    ],
+    "OEPURRAD": [
+        "ATLAS.$ZBAT.OEPURRAD"
+    ],
+    "EPUFILESMFT": [
+        "ATLAS.$ZBAT.EPUFILESMFT"
+    ],
+    "MAILGPAO": [
+        "ATLAS.$ZBAT.MAILGPAO"
+    ],
+    "EPURPRNT": [
+        "ATLAS.$ZBAT.EPURPRNT"
+    ],
+    "EPUGRMFT": [
+        "ATLAS.$ZBAT.EPUGRMFT"
+    ],
+    "SCNFPROD": [
+        "ATLAS.$ZBAT.SCNFPROD"
+    ],
+    "SCNFMFTP": [
+        "ATLAS.$ZBAT.SCNFMFTP"
+    ],
+    "SCNFWEBP": [
+        "ATLAS.$ZBAT.SCNFWEBP"
+    ],
+    "ARSSLRCC": [
+        "ATLAS.$ZBAT.ARSSLRCC"
+    ],
+    "EPULOGMFT": [
+        "ATLAS.$ZBAT.EPULOGMFT"
+    ],
+    "UXITPWSR": [
+        "ATLAS.$ZBAT.UXITPWSR"
+    ],
+    "TCTRLMQ4": [
+        "ATLAS.$ZBAT.TCTRLMQ4"
+    ],
+    "CTRSRVPS": [
+        "ATLAS.$ZBAT.CTRSRVPS"
+    ],
+    "SAVESPOOL101": [
+        "ATLAS.$ZBAT.SAVESPOOL101"
+    ],
+    "SAUVMQS": [
+        "ATLAS.$ZBAT.SAUVMQS"
+    ],
+    "OEXPMAIL": [
+        "ATLAS.$ZBAT.OEXPMAIL"
+    ],
+    "ORELSURV": [
+        "ATLAS.$ZBAT.ORELSURV"
+    ],
+    "NAMEGOTS": [
+        "ATLAS.$ZBAT.NAMEGOTS"
+    ],
+    "SURVST2": [
+        "ATLAS.$ZBAT.SURVST2"
+    ],
+    "EMOAUMCND": [
+        "ATLAS.$ZBAT.EMOAUMCND"
+    ],
+    "EPURXMFT": [
+        "ATLAS.$ZBAT.EPURXMFT"
+    ],
+    "ONTST03": [
+        "ATLAS.$ZBAD.ONTST03"
+    ],
+    "ONTST01": [
+        "ATLAS.$ZBAD.ONTST01"
+    ],
+    "ONBNNPD": [
+        "ATLAS.$ZBAD.ONBNNPD"
+    ],
+    "ONBNNPK": [
+        "ATLAS.$ZBAD.ONBNNPK"
+    ],
+    "ONBNNPR": [
+        "ATLAS.$ZBAD.ONBNNPR"
+    ],
+    "ONBNNPU": [
+        "ATLAS.$ZBAD.ONBNNPU"
+    ],
+    "ONBNNPV": [
+        "ATLAS.$ZBAD.ONBNNPV"
+    ],
+    "TNBNNPU": [
+        "ATLAS.$ZBAD.TNBNNPU"
+    ],
+    "ONBNNP2": [
+        "ATLAS.$ZBAD.ONBNNP2"
+    ],
+    "TNBNNPD": [
+        "ATLAS.$ZBAD.TNBNNPD"
+    ],
+    "TPSVPTHI": [
+        "ATLAS.$ZBAD.TPSVPTHI"
+    ],
+    "SAVECMDP": [
+        "ATLAS.$ZBAD.SAVECMDP"
+    ],
+    "TLANCMEP": [
+        "ATLAS.$ZBAD.TLANCMEP"
+    ],
+    "OSVM085": [
+        "ATLAS.$ZBAD.OSVM085"
+    ],
+    "OM48CD00": [
+        "ATLAS.$ZBAD.OM48CD00"
+    ],
+    "OM48CD00K": [
+        "ATLAS.$ZBAD.OM48CD00K"
+    ],
+    "OLINIMAP": [
+        "ATLAS.$ZBAD.OLINIMAP"
+    ],
+    "OCONCILR": [
+        "ATLAS.$ZBAD.OCONCILR"
+    ],
+    "ORECONCL": [
+        "ATLAS.$ZBAD.ORECONCL"
+    ],
+    "OSRACR2K": [
+        "ATLAS.$ZBAD.OSRACR2K"
+    ],
+    "OSRACB1K": [
+        "ATLAS.$ZBAD.OSRACB1K"
+    ],
+    "TLANCMER": [
+        "ATLAS.$ZBAD.TLANCMER"
+    ],
+    "OAUMCND": [
+        "ATLAS.$ZBAD.OAUMCND"
     ]
 }

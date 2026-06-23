@@ -5,12 +5,11 @@ import { Search } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-
-import { searchJobs } from "@/lib/search";
+import { useDatabase } from "@/components/database-context";
 
 interface ModelCardProps {
 
-    onLoad: (query: string) => void;
+    onLoad: (system: string, monitor: string, jobName: string) => void;
 
 }
 
@@ -19,6 +18,7 @@ export default function ModelCard({
     onLoad
 
 }: ModelCardProps) {
+    const { searchJobs } = useDatabase();
 
     const [query, setQuery] = useState("");
 
@@ -38,7 +38,8 @@ export default function ModelCard({
 
         [
 
-            query
+            query,
+            searchJobs
 
         ]
 
@@ -107,7 +108,7 @@ export default function ModelCard({
 
                                         <button
 
-                                            key={`${job.monitor}_${job.job_name}`}
+                                            key={`${job.system}.${job.monitor}.${job.job_name}`}
 
                                             className="
                                                 flex
@@ -136,6 +137,10 @@ export default function ModelCard({
 
                                                 onLoad(
 
+                                                    job.system,
+
+                                                    job.monitor,
+
                                                     job.job_name
 
                                                 );
@@ -154,7 +159,7 @@ export default function ModelCard({
 
                                                 <div className="text-sm text-zinc-500">
 
-                                                    {job.monitor}
+                                                    {job.system} • {job.monitor}
 
                                                 </div>
 
